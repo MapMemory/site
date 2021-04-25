@@ -1,0 +1,40 @@
+#header {
+    position: fixed;
+    padding: 0rem 0rem 0.4rem;
+    background-color: white;
+    line-height: 22px;
+    font-size: 18px;
+    font-family: Nunito-ExtraBold;
+    display: flex;
+    border-bottom: 1.5px solid rgb(241, 241, 241);
+    width: 100%;
+    z-index: 999;
+}
+
+#header > .logo {
+    width: 80px;
+    height: 80px;
+}
+
+#header > .name {
+    display: block;
+    flex-basis: 0;
+    flex-grow: 1;
+    flex-shrink: 1;
+    padding-left: 0px;
+    margin-top: auto;
+    margin-bottom: auto;
+    font-size: 35px;
+    color: rgb(0, 0, 0);
+}
+
+@media (max-width: 800px) {
+    #header > .logo {
+        width: 60px;
+        height: 60px;
+    }
+
+    #header > .name {
+        font-size: 25px;
+    }
+}
