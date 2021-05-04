@@ -1,0 +1,68 @@
+.block:nth-child(odd) {
+    background-color: rgb(211, 235, 211);
+}
+
+.block:nth-child(even) {
+    background-color: rgb(186, 233, 241);
+}
+
+.block {
+    display: flex;
+    z-index: 2;
+    height: calc(20vh + 20vw);
+    padding-bottom: 2vh;
+}
+
+.block > .back {
+    z-index: 3;
+    align-self: center;
+    width: 50vw;
+}
+
+.block > .back > .image-object {
+    height: 60%;
+    width: 60%;
+    max-height: calc(15vh + 15vw);
+    float: left;
+    z-index: 5;
+    padding: 10%;
+}
+
+.block > .front {
+    z-index: 3;
+    align-self: center;
+    width: 50vw;
+    padding: 5%;
+}
+
+.block > .front > .text {
+    font-family: Nunito-Regular;
+    font-size: calc(1.5vh + 1.5vw);
+    z-index: 4;
+    text-align: right;
+}
+
+.block > .front > .general {
+    font-family: Nunito-Bold;
+    font-size: calc(2.8vh + 2.8vw);
+}
+
+.block > .front > button {
+    float: right;
+    font-family: Nunito-Bold;
+    font-size: calc(1.5vh + 1.5vw);
+    z-index: 4;
+    text-align: center;
+    background-color: #ffffff;
+    border: 2px solid black;
+    border-radius: 10px;
+}
+
+@media (max-width: 800px) {
+    .block {
+        display: flex;
+        z-index: 2;
+        height: calc(17vh + 17vw);
+        padding-bottom: 2vh;
+    }
+}
