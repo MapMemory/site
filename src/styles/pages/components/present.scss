@@ -1,0 +1,170 @@
+#preview > #blockScroll > #body > .present > .block-left {
+    display: flex;
+    z-index: 2;
+    height: calc(20vh + 20vw);
+}
+
+#preview > #blockScroll > #body > .present > .block-right {
+    display: flex;
+    z-index: 2;
+    height: calc(20vh + 20vw);
+}
+
+#preview > #body > .present > .block-left > .back {
+    z-index: 3;
+    align-self: center;
+    height: calc(20vh + 20vw);
+    width: 50vw;
+}
+
+#preview > #blockScroll > #body > .present > .block-right > .back {
+    z-index: 3;
+    align-self: center;
+    height: calc(20vh + 20vw);
+    width: 50vw;
+}
+
+#preview > #blockScroll > #body > .present > .block-left > .back {
+    z-index: 3;
+    align-self: center;
+    height: calc(20vh + 20vw);
+    width: 50vw;
+}
+
+#preview > #blockScroll > #body > .present > .block-left > .back > .image-object {
+    display: block;
+    height: 70%;
+    width: 70%;
+    float: right;
+    z-index: 5;
+    padding: 10%;
+}
+
+#preview > #blockScroll > #body > .present > .block-right > .back > .image-object {
+    display: block;
+    height: 70%;
+    width: 70%;
+    float: right;
+    z-index: 5;
+    padding: 10%;
+}
+
+#preview > #blockScroll > #body > .present > .block-left > .front {
+    z-index: 3;
+    align-self: center;
+    width: 50vw;
+    padding: 5%;
+}
+
+#preview > #blockScroll > #body > .present > .block-right > .front {
+    z-index: 3;
+    align-self: center;
+    width: 50vw;
+    padding: 5%;
+}
+
+#preview > #blockScroll > #body > .present > .block-left > .front > .text {
+    font-family: Nunito-Regular;
+    font-size: calc(1.5vh + 1.5vw);
+    z-index: 4;
+    text-align: left;
+}
+
+#preview > #blockScroll > #body > .present > .block-right > .front > .text {
+    font-family: Nunito-Regular;
+    font-size: calc(1.5vh + 1.5vw);
+    z-index: 4;
+    text-align: left;
+}
+
+#preview > #blockScroll > #body > .present > .block-left > .front > .general {
+    font-family: Nunito-Bold;
+    font-size: calc(2.8vh + 2.8vw);
+}
+
+#preview > #blockScroll > #body > .present > .block-right > .front > .general {
+    font-family: Nunito-Bold;
+    font-size: calc(2.8vh + 2.8vw);
+}
+
+@media (max-width: 800px) {
+    #preview > #blockScroll > #body > .present > .block-left {
+        display: flex;
+        z-index: 2;
+        height: calc(32vh + 32vw);
+        flex-direction: column;
+    }
+
+    #preview > #blockScroll > #body > .present > .block-right {
+        display: flex;
+        z-index: 2;
+        height: calc(32vh + 32vw);
+        flex-direction: column;
+    }
+
+    #preview > #blockScroll > #body > .present > .block-left > .back {
+        z-index: 3;
+        align-self: center;
+        height: calc(20vh + 20vw);
+        width: 80vw;
+        display: flex;
+        align-items: center;
+    }
+
+    #preview > #blockScroll > #body > .present > .block-right > .back {
+        z-index: 3;
+        align-self: center;
+        height: calc(20vh + 20vw);
+        width: 80vw;
+        display: flex;
+        align-items: center;
+    }
+
+    #preview > #blockScroll > #body > .present > .block-left > .back > .image-object {
+        height: 70%;
+        width: 100%;
+        z-index: 5;
+    }
+
+    #preview > #blockScroll > #body > .present > .block-right > .back > .image-object {
+        height: 70%;
+        width: 100%;
+        z-index: 5;
+    }
+
+    #preview > #blockScroll > #body > .present > .block-left > .front {
+        z-index: 3;
+        align-self: center;
+        width: 80vw;
+    }
+
+    #preview > #blockScroll > #body > .present > .block-right > .front {
+        z-index: 3;
+        align-self: center;
+        width: 80vw;
+    }
+
+    #preview > #blockScroll > #body > .present > .block-left > .front > .text {
+        font-family: Nunito-Regular;
+        font-size: calc(1.5vh + 1.5vw);
+        z-index: 4;
+        text-align: center;
+    }
+
+    #preview > #blockScroll > #body > .present > .block-right > .front > .text {
+        font-family: Nunito-Regular;
+        font-size: calc(1.5vh + 1.5vw);
+        z-index: 4;
+        text-align: center;
+    }
+
+    #preview > #blockScroll > #body > .present > .block-left > .front > .general {
+        font-family: Nunito-Bold;
+        font-size: calc(2.8vh + 2.8vw);
+    }
+
+    #preview > #blockScroll > #body > .present > .block-right > .front > .general {
+        font-family: Nunito-Bold;
+        font-size: calc(2.8vh + 2.8vw);
+    }
+}

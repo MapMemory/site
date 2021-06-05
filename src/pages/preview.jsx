@@ -1,56 +1,74 @@
 import React from 'react';
-import '../styles/light/green/preview.scss'
+
+import '../styles/pages/preview.scss'
+
 import Header from './components/header.jsx'
 import Footer from './components/footer.jsx'
-import ShowcaseObject from './components/showcaseObject.jsx'
-import imgProtected from '../assets/images/svg/protected.svg';
-import imgOpenSouce from '../assets/images/svg/open-source.svg';
-import imgQRCode from '../assets/images/svg/qr-code.svg'
-import imgSettings from '../assets/images/svg/settings.svg'
-import imgMap from '../assets/images/svg/map.svg'
+import Present from './components/present.jsx'
+
+import { ReactComponent as imgProtected } from '../assets/images/svg/protected.svg';
+import { ReactComponent as imgOpenSouce } from '../assets/images/svg/open-source.svg';
+import { ReactComponent as imgQRCode } from '../assets/images/svg/qr-code.svg'
+import { ReactComponent as imgSettings } from '../assets/images/svg/settings.svg'
+import { ReactComponent as imgMap } from '../assets/images/svg/map.svg'
+
+import Person from '../utils/person.jsx';
+import Menu from './components/menu.jsx';
 
 function Body() {
+    let person = new Person();
+
     return (
         <div id="body">
-            <ShowcaseObject
+            <Present
                 title="Удобство"
-                content="Найди на карте то, что именно тебе нужно"
-                img={imgMap}
+                content="Найдите на карте то, что именно вам нужно"
+                ImgObj={imgMap}
                 right={true}
+                theme={person.getThemeColors()}
             />
-            <ShowcaseObject
+            <Present
                 title="Защита"
                 content="Будьте уверены, что мы не собираем информацию о вас, все прозрачно и открыто"
-                img={imgProtected}
-                left={true} />
-            <ShowcaseObject
-                title="Открытость"
-                content="Проект чистый как зеркало после плавки"
-                img={imgOpenSouce}
-                right={true}
-            />
-            <ShowcaseObject
-                title="Быстро"
-                content="Поделись со всеми на столько быстро на сколько это вообще возможно"
-                img={imgQRCode}
+                ImgObj={imgProtected}
                 left={true}
+                theme={person.getThemeColors()}
             />
-            <ShowcaseObject
-                title="Просто"
-                content="Менять темы проще простого попробуйте"
-                img={imgSettings}
+            <Present
+                title="Открытость"
+                content="Проект чистый как песок после плавки"
+                ImgObj={imgOpenSouce}
                 right={true}
+                theme={person.getThemeColors()}
+            />
+            <Present
+                title="Быстрота"
+                content="Поделитесь со всеми на столько быстро на сколько это вообще возможно"
+                ImgObj={imgQRCode}
+                left={true}
+                theme={person.getThemeColors()}
+            />
+            <Present
+                title="Простота"
+                content="Менять темы проще простого попробуйте"
+                ImgObj={imgSettings}
+                right={true}
+                theme={person.getThemeColors()}
             />
         </div>
     );
 }
 
 export default () => {
+
     return (
-        <div>
+        <div id="preview">
             <Header />
-            <Body />
-            <Footer />
+            <Menu />
+            <div id="blockScroll">
+                <Body />
+                <Footer />
+            </div>
         </div>
     );
 };
