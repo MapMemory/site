@@ -1,0 +1,36 @@
+#about > #blockScroll {
+    height: calc(100vh - 84px);
+    overflow-y: auto;
+    overflow-x: hidden;
+}
+
+#about > #blockScroll > #body > p {
+    font-family: Nunito-Regular;
+    font-size: calc(1vh + 1vw) !important;
+    padding: 30px;
+    padding-bottom: 10px;
+    margin: 0px;
+    text-align: left;
+}
+
+#about > #blockScroll > #body > p:last-child {
+    margin-bottom: 0px;
+    padding-bottom: 60px;
+}
+
+@media (max-width: 800px) {
+    #about > #blockScroll {
+        height: calc(100vh - 64px);
+        overflow-y: auto;
+        overflow-x: hidden;
+    }
+
+    #about > #blockScroll > #body > p {
+        font-family: Nunito-Regular;
+        font-size: calc(1.6vh + 1.6vw) !important;
+        padding: 30px;
+        padding-bottom: 10px;
+        margin: 0px;
+        text-align: center;
+    }
+}
