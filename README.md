@@ -1,5 +1,5 @@
 # site
-🌣 MapMemory site, where everything is displayed...
+☀ MapMemory site, where everything is displayed...
 
 ## Available Scripts
 
