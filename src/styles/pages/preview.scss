@@ -1,0 +1,11 @@
+#preview > #blockScroll {
+    height: calc(100vh - 83px);
+    overflow-y: auto;
+    overflow-x: hidden;
+}
+
+@media (max-width: 940px) {
+    #preview > #blockScroll {
+        height: calc(100vh - 63px);
+    }
+}
