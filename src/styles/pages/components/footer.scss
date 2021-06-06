@@ -1,0 +1,86 @@
+#footer {
+    padding: 3rem 3.5rem 6rem;
+    background-color: rgb(49, 49, 49);
+    line-height: 22px;
+    font-size: 25px;
+    color: white;
+    font-family: Nunito-ExtraBold;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.6);
+    border-top: 4px solid black;
+    z-index: 999;
+    text-align: center;
+}
+
+#footer > .container {
+    flex-grow: 1;
+    margin: 0 auto;
+    position: relative;
+    width: auto;
+}
+
+#footer > .container > .columns {
+    display: flex;
+}
+
+#footer > .container > .columns > .column {
+    display: block;
+    flex-basis: 0;
+    flex-grow: 1;
+    flex-shrink: 1;
+    padding-left: 40px;
+}
+
+#footer > .container > .columns > .column > strong {
+    color: #e9e9e9;
+    display: block;
+    font-weight: 600;
+    margin-bottom: 12px;
+    font-family: Nunito-ExtraBold;
+}
+
+#footer > .container > .columns > .column > ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+#footer > .container > .columns > .column > ul > li {
+    font-family: Nunito-Regular;
+    padding-top: 5px;
+}
+
+#footer > .container > .columns > .column > ul > li:hover {
+    font-family: Nunito-Bold;
+    transition: 0.1s;
+    cursor: pointer;
+}
+
+#footer > li {
+    display: list-item;
+    text-align: -webkit-match-parent;
+}
+
+@media (max-width: 940px) {
+    #footer {
+        padding: 1.5rem 3.5rem 1.8rem;
+    }
+
+    #footer > .container > .columns > .column {
+        display: none;
+        font-size: 20px;
+    }
+
+    #footer > .container > .columns > .group-columns {
+        width: 100%;
+    }
+
+    #footer > .container > .columns > .group-columns > span {
+        font-size: 20px;
+        text-align: center;
+    }
+
+    #footer > .container > .columns > .group-columns > div {
+        font-size: 20px;
+        text-align: center;
+    }
+}
