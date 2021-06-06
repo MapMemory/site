@@ -8,7 +8,7 @@ import Routes from './routes.js'
 import ScrollToTop from './utils/helpers/ScrollToTop.jsx'
 
 ReactDOM.render(
-  <BrowserRouter history={BrowserRouter}>
+  <BrowserRouter>
     <ScrollToTop />
     <Routes />
   </BrowserRouter>,
