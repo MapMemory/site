@@ -12,7 +12,6 @@ import Admin from './pages/admin.jsx'
 export default () => {
     return (
         <Switch>
-            <Route exact path="" component={Preview} />
             <Route exact path="/" component={Preview} />
             <Route exact path="/map" component={Map} />
             <Route exact path="/about" component={About} />
