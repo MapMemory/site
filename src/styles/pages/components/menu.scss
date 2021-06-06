@@ -1,0 +1,91 @@
+#menu {
+    display: flex;
+    flex-wrap: wrap;
+    z-index: 1;
+    height: calc(100vh - 84px);
+    width: 100vw;
+}
+
+#menu > #boxChoice {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    z-index: 5;
+    height: 100%;
+    width: 100%;
+}
+
+#menu > #boxChoice > .block {
+    margin: auto;
+}
+
+#menu > #boxChoice > .block > .front {
+    z-index: 3;
+    align-self: center;
+}
+
+#menu > #boxChoice > .block > .front > button {
+    float: right;
+    font-family: Nunito-Bold;
+    font-size: calc(1.5vh + 1.5vw);
+    z-index: 4;
+    text-align: center;
+    background-color: #ffffff;
+    border: 4px solid black;
+    border-radius: 10px;
+    align-items: center;
+    display: flex;
+}
+
+#menu > #boxChoice > .block > .front > button > svg {
+    height: 20vh;
+    width: 10vw;
+}
+
+@media (max-width: 940px) {
+    #menu {
+        height: calc(100vh - 64px);
+    }
+
+    #menu > #boxChoice {
+        display: flex;
+        flex-direction: column;
+        flex-wrap: wrap;
+        z-index: 5;
+        height: 100%;
+        width: 100%;
+    }
+
+    #menu > #boxChoice > .block:first-child {
+        margin-top: 20px;
+    }
+
+    #menu > #boxChoice > .block {
+        margin-top: 10px;
+    }
+
+    #menu > #boxChoice > .block > .front {
+        z-index: 3;
+        align-self: center;
+    }
+
+    #menu > #boxChoice > .block > .front > button {
+        float: right;
+        font-family: Nunito-Bold;
+        font-size: calc(1.5vh + 1.5vw);
+        z-index: 4;
+        text-align: center;
+        background-color: #ffffff;
+        border: 4px solid black;
+        border-radius: 10px;
+        width: 80vw;
+        height: calc(100vh / 10);
+        align-items: center;
+        display: flex;
+    }
+
+    #menu > #boxChoice > .block > .front > button > svg {
+        height: calc(100vh / 12);
+        width: 80vw;
+    }
+}
