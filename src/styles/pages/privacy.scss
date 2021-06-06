@@ -2,6 +2,9 @@
     height: calc(100vh - 84px);
     overflow-y: auto;
     overflow-x: hidden;
+    bottom: 0px;
+    width: 100%;
+    position: absolute;
 }
 
 #privacy > #blockScroll > #body > h1 {
@@ -36,6 +39,9 @@
         height: calc(100vh - 64px);
         overflow-y: auto;
         overflow-x: hidden;
+        bottom: 0px;
+        width: 100%;
+        position: absolute;
     }
 
     #privacy > #blockScroll > #body > h1 {

@@ -2,6 +2,9 @@
     height: calc(100vh - 84px);
     overflow-y: auto;
     overflow-x: hidden;
+    bottom: 0px;
+    width: 100%;
+    position: absolute;
 }
 
 @media (max-width: 940px) {
@@ -9,5 +12,8 @@
         height: calc(100vh - 64px);
         overflow-y: auto;
         overflow-x: hidden;
+        bottom: 0px;
+        width: 100%;
+        position: absolute;
     }
 }
