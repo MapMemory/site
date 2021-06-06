@@ -1,0 +1,13 @@
+#themes > #blockScroll {
+    height: calc(100vh - 83px);
+    overflow-y: auto;
+    overflow-x: hidden;
+}
+
+@media (max-width: 940px) {
+    #themes > #blockScroll {
+        height: calc(100vh - 63px);
+        overflow-y: auto;
+        overflow-x: hidden;
+    }
+}
