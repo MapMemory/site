@@ -1,0 +1,266 @@
+#download > #blockScroll > #body > #Smartphone > .name > hr:first-child {
+    display: none;
+}
+
+#download > #blockScroll > #body {
+    padding-top: 0px;
+}
+
+#download > #blockScroll > #body > #Smartphone > .block {
+    display: flex;
+    z-index: 2;
+    height: calc(20vh + 20vw);
+    padding-bottom: 2vh;
+}
+
+#download > #blockScroll > #body > #Smartphone > .block > .back {
+    align-self: center;
+    display: flex;
+    height: 60%;
+    width: 60%;
+    margin: 40px;
+}
+
+#download > #blockScroll > #body > #Smartphone > .block > .back > .image-object {
+    align-self: center;
+    flex-direction: column;
+    height: 100%;
+    width: 100%;
+    float: right;
+}
+
+#download > #blockScroll > #body > #Smartphone > .block > .front {
+    z-index: 3;
+    align-self: center;
+    width: 50vw;
+    padding: 5%;
+}
+
+#download > #blockScroll > #body > #Smartphone > .block > .front > .general {
+    font-family: Nunito-Bold;
+    font-size: calc(2.4vh + 2.4vw);
+}
+
+#download > #blockScroll > #body > #Smartphone > .block > .front > button {
+    float: left;
+    font-family: Nunito-Bold;
+    font-size: calc(1.5vh + 1.5vw);
+    z-index: 4;
+    text-align: center;
+    background-color: #ffffff;
+    border: 3px solid black;
+    border-radius: 10px;
+    padding: 6px;
+}
+
+#download > #blockScroll > #body > #Smartphone > .block > .front > button:hover {
+    box-shadow: 0 0 0 1px #000000 inset, 0 0 0 2px white inset;
+    transition: 0.1s;
+    cursor: pointer;
+}
+
+#download > #blockScroll > #body > #Smartphone > .block > .front > button:active {
+    box-shadow: 0 0 0 2px white inset, 0 0 0 4px #000000 inset;
+    transition: 0.1s;
+    cursor: pointer;
+}
+
+#download > #blockScroll > #body > #Smartphone > .name > hr {
+    border: 2px solid #313131;
+    background-color: #313131;
+    margin: 0px;
+}
+
+#download > #blockScroll > #body > #Smartphone > .name > p {
+    text-align: center;
+    vertical-align: middle;
+    margin: 0px;
+    font-family: Nunito-Bold;
+    font-size: calc(2.6vh + 2.6vw);
+}
+
+@media (max-width: 940px) {
+    #download > #blockScroll > #body > #Smartphone > .block {
+        display: flex;
+        z-index: 2;
+        height: calc(17vh + 17vw);
+        padding-bottom: 2vh;
+    }
+
+    #download > #blockScroll > #body > #Smartphone > .block {
+        display: flex;
+        flex-direction: column;
+        z-index: 2;
+        height: calc(25vh + 25vw);
+        padding-bottom: 2vh;
+    }
+
+    #download > #blockScroll > #body > #Smartphone > .block > .front {
+        display: flex;
+        flex-direction: column;
+    }
+
+    #download > #blockScroll > #body > #Smartphone > .block > .front > .text {
+        font-family: Nunito-Bold;
+        font-size: calc(2.4vh + 2.4vw) !important;
+        z-index: 4;
+        text-align: center;
+    }
+
+    #download > #blockScroll > #body > #Smartphone > .block > .front > button {
+        float: none;
+        font-family: Nunito-Bold;
+        font-size: calc(2.2vh + 2.2vw);
+        z-index: 4;
+        text-align: center;
+        background-color: #ffffff;
+        border: 3px solid black;
+        border-radius: 10px;
+        margin-top: 10px;
+    }
+
+    #download > #blockScroll > #body > #Smartphone > .block > .back {
+        align-self: center;
+        display: flex;
+        height: 60%;
+        width: 60%;
+        margin: 0px;
+    }
+
+    #download > #blockScroll > #body > #Smartphone > .block > .back > .image-object {
+        align-self: center;
+        flex-direction: column;
+        height: 60%;
+        width: 100%;
+        float: right;
+    }
+}
+
+#download > #blockScroll > #body > #Desktop > .block {
+    display: flex;
+    z-index: 2;
+    height: calc(20vh + 20vw);
+    padding-bottom: 2vh;
+}
+
+#download > #blockScroll > #body > #Desktop > .block > .back {
+    align-self: center;
+    display: flex;
+    height: 60%;
+    width: 60%;
+    margin: 40px;
+}
+
+#download > #blockScroll > #body > #Desktop > .block > .back > .image-object {
+    align-self: center;
+    flex-direction: column;
+    height: 100%;
+    width: 100%;
+    float: right;
+}
+
+#download > #blockScroll > #body > #Desktop > .block > .front {
+    z-index: 3;
+    align-self: center;
+    width: 50vw;
+    padding: 5%;
+}
+
+#download > #blockScroll > #body > #Desktop > .block > .front > .general {
+    font-family: Nunito-Bold;
+    font-size: calc(2.8vh + 2.8vw);
+}
+
+#download > #blockScroll > #body > #Desktop > .block > .front > button {
+    float: left;
+    font-family: Nunito-Bold;
+    font-size: calc(1.5vh + 1.5vw);
+    z-index: 4;
+    text-align: center;
+    background-color: #ffffff;
+    border: 3px solid black;
+    border-radius: 10px;
+    padding: 6px;
+}
+
+#download > #blockScroll > #body > #Desktop > .block > .front > button:hover {
+    box-shadow: 0 0 0 1px #000000 inset, 0 0 0 2px white inset;
+    transition: 0.1s;
+    cursor: pointer;
+}
+
+#download > #blockScroll > #body > #Desktop > .block > .front > button:active {
+    box-shadow: 0 0 0 2px white inset, 0 0 0 4px #000000 inset;
+    transition: 0.1s;
+    cursor: pointer;
+}
+
+#download > #blockScroll > #body > #Desktop > .name > p {
+    text-align: center;
+    vertical-align: middle;
+    margin: 0px;
+    font-family: Nunito-Bold;
+    font-size: calc(2.6vh + 2.6vw);
+}
+
+#download > #blockScroll > #body > #Desktop > .name > hr {
+    border: 2px solid #313131;
+    background-color: #313131;
+    margin: 0px;
+}
+
+@media (max-width: 940px) {
+    #download > #blockScroll {
+        height: calc(100vh - 63px);
+        overflow-y: auto;
+        overflow-x: hidden;
+    }
+
+    #download > #blockScroll > #body > #Desktop > .block {
+        display: flex;
+        flex-direction: column;
+        z-index: 2;
+        height: calc(25vh + 25vw);
+        padding-bottom: 2vh;
+    }
+
+    #download > #blockScroll > #body > #Desktop > .block > .front {
+        display: flex;
+        flex-direction: column;
+    }
+
+    #download > #blockScroll > #body > #Desktop > .block > .front > .text {
+        font-family: Nunito-Bold;
+        font-size: calc(2.4vh + 2.4vw) !important;
+        z-index: 4;
+        text-align: center;
+    }
+
+    #download > #blockScroll > #body > #Desktop > .block > .front > button {
+        float: none;
+        font-family: Nunito-Bold;
+        font-size: calc(2.2vh + 2.2vw);
+        z-index: 4;
+        text-align: center;
+        background-color: #ffffff;
+        border: 3px solid black;
+        border-radius: 10px;
+        margin-top: 10px;
+    }
+
+    #download > #blockScroll > #body > #Desktop > .block > .back {
+        align-self: center;
+        display: flex;
+        height: 60%;
+        width: 60%;
+        margin: 0px;
+    }
+
+    #download > #blockScroll > #body > #Desktop > .block > .back > .image-object {
+        align-self: center;
+        flex-direction: column;
+        height: 60%;
+        width: 100%;
+        float: right;
+    }
+}
