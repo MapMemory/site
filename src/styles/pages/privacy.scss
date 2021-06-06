@@ -1,0 +1,69 @@
+#privacy > #blockScroll {
+    height: calc(100vh - 83px);
+    overflow-y: auto;
+    overflow-x: hidden;
+}
+
+#privacy > #blockScroll > #body > h1 {
+    font-family: Nunito-Regular;
+    margin: 0px;
+    padding: 30px;
+    padding-bottom: 10px;
+    text-align: left;
+}
+
+#privacy > #blockScroll > #body > h2 {
+    font-family: Nunito-Regular;
+    margin: 30px;
+    text-align: left;
+}
+
+#privacy > #blockScroll > #body > p > b {
+    font-family: Nunito-Bold;
+    font-size: calc(1vh + 1vw) !important;
+    text-align: left;
+}
+
+#privacy > #blockScroll > #body > p {
+    font-family: Nunito-Regular;
+    margin: 30px;
+    font-size: calc(1vh + 1vw) !important;
+    text-align: left;
+}
+
+@media (max-width: 940px) {
+    #privacy > #blockScroll {
+        height: calc(100vh - 63px);
+        overflow-y: auto;
+        overflow-x: hidden;
+    }
+
+    #privacy > #blockScroll > #body > h1 {
+        font-size: calc(2vh + 2vw) !important;
+        padding-bottom: 10px;
+        text-align: center;
+    }
+
+    #privacy > #blockScroll > #body > h2 {
+        font-size: calc(2.2vh + 2.2vw) !important;
+        text-align: center;
+    }
+
+    #privacy > #blockScroll > #body > p > b {
+        font-family: Nunito-Bold;
+        font-size: calc(1.6vh + 1.6vw) !important;
+        text-align: center;
+    }
+
+    #privacy > #blockScroll > #body > p {
+        font-family: Nunito-Regular;
+        margin: 30px;
+        font-size: calc(1.6vh + 1.6vw) !important;
+        text-align: center;
+    }
+}
+
+#privacy > #blockScroll > #body > p:last-child {
+    margin-bottom: 0px;
+    padding-bottom: 60px;
+}
