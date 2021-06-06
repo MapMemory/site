@@ -210,12 +210,6 @@
 }
 
 @media (max-width: 940px) {
-    #download > #blockScroll {
-        height: calc(100vh - 63px);
-        overflow-y: auto;
-        overflow-x: hidden;
-    }
-
     #download > #blockScroll > #body > #Desktop > .block {
         display: flex;
         flex-direction: column;

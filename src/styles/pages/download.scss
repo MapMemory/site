@@ -1,12 +1,12 @@
 #download > #blockScroll {
-    height: calc(100vh - 83px);
+    height: calc(100vh - 84px);
     overflow-y: auto;
     overflow-x: hidden;
 }
 
 @media (max-width: 940px) {
     #download > #blockScroll {
-        height: calc(100vh - 63px);
+        height: calc(100vh - 64px);
         overflow-y: auto;
         overflow-x: hidden;
     }
