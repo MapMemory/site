@@ -35,6 +35,19 @@
     border-radius: 10px;
     align-items: center;
     display: flex;
+    padding: 6px;
+}
+
+#menu > #boxChoice > .block > .front > button:hover {
+    box-shadow: 0 0 0 1px #000000 inset, 0 0 0 2px white inset;
+    transition: 0.1s;
+    cursor: pointer;
+}
+
+#menu > #boxChoice > .block > .front > button:active {
+    box-shadow: 0 0 0 2px white inset, 0 0 0 4px #000000 inset;
+    transition: 0.1s;
+    cursor: pointer;
 }
 
 #menu > #boxChoice > .block > .front > button > svg {
@@ -79,9 +92,10 @@
         border: 4px solid black;
         border-radius: 10px;
         width: 80vw;
-        height: calc(100vh / 10);
+        height: calc(100vh / 9);
         align-items: center;
         display: flex;
+        padding: 6px;
     }
 
     #menu > #boxChoice > .block > .front > button > svg {
