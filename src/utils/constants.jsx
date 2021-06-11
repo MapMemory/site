@@ -1,4 +1,5 @@
 const SERVER_ADDRESS = 'http://localhost:80/';
+const SITE_ADDRESS = 'http://localhost:3000';
 
 const PAGES = {
     MAP: {
@@ -10,6 +11,9 @@ const PAGES = {
         GET_STREETS: 'map/getStreets.php',
         SET_RATING: 'map/setRating.php'
     },
+    ADMIN: {
+        GET_IS_AUTH: 'admin/getIsAuth.php'
+    }
 };
 
-export default { SERVER_ADDRESS, PAGES };
+export default { SITE_ADDRESS, SERVER_ADDRESS, PAGES };

@@ -1,0 +1,408 @@
+#admin > #blockScroll {
+    height: calc(100% - (3.2vh + 3.2vw + 4px));
+    position: absolute;
+}
+
+.leaflet-control-zoom {
+    margin-top: 100px !important;
+}
+
+.leaflet-tile {
+    background-color: black;
+}
+
+.leaflet-container .leaflet-control-attribution {
+    display: none;
+}
+
+#admin > #blockScroll > #body {
+    height: 100%;
+}
+
+#admin > #blockScroll > #body > #bone {
+    width: 100vw;
+    height: 100%;
+    display: flex;
+    justify-items: center;
+    justify-content: center;
+    justify-self: center;
+}
+
+@media (max-width: 480px) {
+    #admin > #blockScroll {
+        height: calc(100% - (5.2vh + 5.2vw + 4px));
+        position: absolute;
+    }
+
+    #admin > #blockScroll > #body {
+        height: 100%;
+        display: flex;
+        justify-items: center;
+        justify-content: center;
+        justify-self: center;
+    }
+
+    #admin > #blockScroll > #body > #bone {
+        width: 100vw;
+        height: 100%;
+        display: flex;
+        justify-items: center;
+        justify-content: center;
+        justify-self: center;
+    }
+
+    .leaflet-control > #box > #blockObjectActions > .text {
+        font-size: calc(1.5vh + 1.5vw) !important;
+    }
+    .leaflet-control > #box > #blockGlobalActions > .text {
+        font-size: calc(1.5vh + 1.5vw) !important;
+    }
+
+    #boxCommitChanges {
+        margin-right: 10px;
+        width: calc(3vh + 3vw) !important;
+        height: calc(3vh + 3vw) !important;
+        border: 3px solid #f3f3f3;
+        border-radius: 6px;
+        cursor: pointer;
+    }
+
+    #boxCommitChanges > svg {
+        margin: 5px;
+    }
+
+    #boxDeletePoint {
+        margin-right: 10px;
+        width: calc(3vh + 3vw) !important;
+        height: calc(3vh + 3vw) !important;
+        border: 3px solid #f3f3f3;
+        border-radius: 6px;
+        cursor: pointer;
+    }
+
+    #boxDeletePoint > svg {
+        margin: 5px;
+    }
+
+    #boxDownload {
+        margin-right: 10px;
+        width: calc(3vh + 3vw) !important;
+        height: calc(3vh + 3vw) !important;
+        border: 3px solid #f3f3f3;
+        border-radius: 6px;
+        cursor: pointer;
+    }
+
+    #boxDownload > svg {
+        margin: 5px;
+    }
+}
+
+#admin > #blockScroll > #body > #bone > #containerLogin {
+    box-shadow: 0 0 8px rgba(0, 0, 0, 0.6);
+    border-radius: 10px;
+    padding: 50px;
+    transition: 0.1s;
+    margin: auto;
+    display: flex;
+}
+
+#admin > #blockScroll > #body > #bone > #containerLogin > #boxLogin {
+    display: flex;
+    justify-items: center;
+    flex-direction: column;
+    justify-content: center;
+    justify-self: center;
+    height: calc(10vh + 10vw);
+    width: calc(10vh + 10vw);
+    align-items: center;
+}
+
+#admin > #blockScroll > #body > #bone > #containerLogin > #boxLogin > .text {
+    font-family: Nunito-Bold;
+    font-size: calc(1.5vh + 1.5vw);
+}
+
+#admin > #blockScroll > #body > #bone > #containerLogin > #boxLogin > button {
+    height: calc(6vh + 2vw);
+    width: calc(8vh + 8vw);
+    float: right;
+    font-family: Nunito-Bold;
+    font-size: calc(1.5vh + 1.5vw);
+    z-index: 4;
+    text-align: center;
+    border: 4px solid rgb(255, 255, 255);
+    border-color: black;
+    border-radius: 10px;
+    transition: 1s;
+}
+
+#admin > #blockScroll > #body > #bone > #containerLogin > #boxLogin > button:hover {
+    box-shadow: 0 0 0 1px #000000 inset, 0 0 0 2px white inset;
+    transition: 0.1s;
+    cursor: pointer;
+}
+
+#admin > #blockScroll > #body > #bone > #containerLogin > #boxLogin > button:active {
+    box-shadow: 0 0 0 2px white inset, 0 0 0 4px #000000 inset;
+    transition: 0.1s;
+    cursor: pointer;
+}
+
+#admin > #blockScroll > #body > #bone > #containerLogin > #boxLogin > input {
+    font-family: Nunito-Regular;
+    font-size: calc(1.1vh + 1.1vw) !important;
+    border-radius: 5px;
+    text-align: center;
+    outline: 0px;
+    font-size: large;
+    width: 90%;
+    padding: 10px;
+
+    outline: none;
+    text-align: center;
+    white-space: normal;
+    word-wrap: break-word;
+    border: 3px solid #000000;
+    border-radius: 5px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+}
+
+#admin > #blockScroll > #body > #bone > #containerLogin > #lockCircle {
+    height: calc(10vh + 10vw);
+    width: calc(10vh + 10vw);
+    align-items: center;
+}
+
+#admin > #blockScroll > #body > #loading {
+    display: flex;
+    height: 100%;
+    width: 100%;
+    align-items: center;
+}
+
+#admin > #blockScroll > #body > .light:after {
+    border-color: #ffffff transparent #ffffff transparent;
+}
+
+#admin > #blockScroll > #body > .dark:after {
+    border-color: #313131 transparent #313131 transparent;
+}
+
+#admin > #blockScroll > #body > #loading:after {
+    content: " ";
+    display: block;
+    width: calc(10vw + 10vh);
+    height: calc(10vw + 10vh);
+    border-radius: 50%;
+    margin: auto;
+    border-width: 6px;
+    border-style: solid;
+    animation: loadingKeyFrames 1.2s linear infinite;
+}
+
+@keyframes loadingKeyFrames {
+    0% {
+        transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+.leaflet-control > #box > #blockFullInfo > #objInfo > div > textarea {
+    display: flex;
+    align-self: center;
+    font-family: Nunito-Regular;
+    font-size: calc(0.9vh + 1vw);
+    margin: auto;
+    margin-bottom: 10px !important;
+    z-index: 4;
+    text-align: center;
+    white-space: normal;
+    word-wrap: break-word;
+    border: 1px solid #888;
+    width: 85%;
+    max-width: 85%;
+    min-width: 85%;
+    transition: 0s;
+    outline: none;
+    -moz-appearance: none;
+    overflow-x: hidden;
+    cursor: text;
+}
+
+.leaflet-control > #box > #blockFullInfo > #objInfo > div > input {
+    font-family: Nunito-Bold;
+    height: calc(1vh + 2vw);
+    width: calc(10vh + 10vw);
+    border: 2px solid rgb(255, 255, 255);
+    border-radius: 5px;
+    text-align: center;
+    outline: 0px;
+    font-size: large;
+    display: block;
+}
+
+.leaflet-control > #box > #blockFullInfo {
+    border-top: 0px solid;
+}
+
+#boxCommitChanges {
+    margin-right: 10px;
+    width: calc(1.8vh + 1.8vw);
+    height: calc(1.8vh + 1.8vw);
+    border: 3px solid #f3f3f3;
+    border-radius: 6px;
+    cursor: pointer;
+}
+
+#boxCommitChanges > svg {
+    margin: 5px;
+}
+
+#boxDeletePoint {
+    margin-right: 10px;
+    width: calc(1.8vh + 1.8vw);
+    height: calc(1.8vh + 1.8vw);
+    border: 3px solid #f3f3f3;
+    border-radius: 6px;
+    cursor: pointer;
+}
+
+#boxDeletePoint > svg {
+    margin: 5px;
+}
+
+#boxNewPoint {
+    margin-right: 10px;
+    width: calc(1.8vh + 1.8vw);
+    height: calc(1.8vh + 1.8vw);
+    border: 3px solid #f3f3f3;
+    border-radius: 6px;
+    cursor: pointer;
+}
+
+#boxNewPoint > svg {
+    margin: 5px;
+}
+
+#boxUpload {
+    margin-right: 10px;
+    width: calc(1.8vh + 1.8vw);
+    height: calc(1.8vh + 1.8vw);
+    border: 3px solid #f3f3f3;
+    border-radius: 6px;
+    cursor: pointer;
+}
+
+#boxUpload > svg {
+    margin: 5px;
+}
+
+#boxDownload {
+    margin-right: 10px;
+    width: calc(1.8vh + 1.8vw);
+    height: calc(1.8vh + 1.8vw);
+    border: 3px solid #f3f3f3;
+    border-radius: 6px;
+    cursor: pointer;
+}
+
+#boxDownload > svg {
+    margin: 5px;
+}
+
+#boxMagnifySearch {
+    margin-right: 10px;
+    width: calc(1.8vh + 1.8vw);
+    height: calc(1.8vh + 1.8vw);
+    border: 3px solid #f3f3f3;
+    border-radius: 6px;
+    cursor: pointer;
+}
+
+#boxMagnifySearch > svg {
+    margin: 5px;
+}
+
+#blockObjectActions {
+    width: 100%;
+    border-top: 3px solid;
+}
+
+#boxObjectActions {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-items: center;
+    justify-content: center;
+    justify-self: center;
+    margin-bottom: 10px;
+}
+
+#blockGlobalActions {
+    width: 100%;
+    border-top: 3px solid;
+}
+
+#boxGlobalActions {
+    width: 100%;
+    display: flex;
+    justify-items: center;
+    justify-content: center;
+    justify-self: center;
+    margin-bottom: 10px;
+}
+
+.leaflet-control > #box > #blockObjectActions > .text {
+    font-family: Nunito-Regular;
+    font-weight: bold;
+    font-size: calc(1vh + 1vw);
+    margin: auto;
+    z-index: 4;
+    text-align: center;
+    white-space: normal;
+    word-wrap: break-word;
+    cursor: pointer;
+}
+
+.leaflet-control > #box > #blockGlobalActions > .text {
+    font-family: Nunito-Regular;
+    font-weight: bold;
+    font-size: calc(1vh + 1vw);
+    margin: auto;
+    z-index: 4;
+    text-align: center;
+    white-space: normal;
+    word-wrap: break-word;
+    cursor: pointer;
+}
+
+#objInfo > div {
+    max-height: calc(35vh);
+    overflow-y: auto;
+    overflow-x: hidden;
+    bottom: 0px;
+    width: 100%;
+}
+
+#fullObjectActionLine {
+    border-width: 0px;
+    height: 4px;
+    border-style: solid;
+    width: 60%;
+    margin-bottom: 10px;
+}
+
+#fullGlobalActionLine {
+    border-width: 0px;
+    height: 4px;
+    border-style: solid;
+    width: 60%;
+    margin-bottom: 10px;
+}

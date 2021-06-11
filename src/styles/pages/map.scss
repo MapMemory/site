@@ -1,0 +1,649 @@
+#map > #blockScroll {
+    height: calc(100% - (3.2vh + 3.2vw + 4px));
+    overflow-y: auto;
+    overflow-x: hidden;
+    bottom: 0px;
+    width: 100%;
+    position: absolute;
+}
+
+.leaflet-container {
+    position: fixed !important;
+    padding-top: 85px;
+    height: calc(100%) !important;
+    width: 100vw;
+    overflow-x: hidden;
+    overflow-y: hidden;
+}
+
+.leaflet-tile {
+    background-color: black;
+}
+
+.leaflet-container .leaflet-control-attribution {
+    display: none;
+}
+
+#map > #blockScroll > #body {
+    display: block;
+    height: 100%;
+    width: 100%;
+}
+
+#map > #blockScroll > #body > #loading {
+    display: flex;
+    height: 100%;
+    width: 100%;
+    align-items: center;
+}
+
+#map > #blockScroll > #body > .light:after {
+    border-color: #ffffff transparent #ffffff transparent;
+}
+
+#map > #blockScroll > #body > .dark:after {
+    border-color: #313131 transparent #313131 transparent;
+}
+
+#map > #blockScroll > #body > #loading:after {
+    content: " ";
+    display: block;
+    width: calc(10vw + 10vh);
+    height: calc(10vw + 10vh);
+    border-radius: 50%;
+    margin: auto;
+    border-width: 6px;
+    border-style: solid;
+    animation: loadingKeyFrames 1.2s linear infinite;
+}
+
+.leaflet-control > #box {
+    margin-top: 100px;
+    margin-right: 10px;
+    width: calc(15vw + 15vh);
+    box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.6);
+    border-radius: 5px;
+    border-radius: 6px;
+    border-style: solid;
+}
+
+div > #qrBox {
+    display: none;
+    border-radius: 5px;
+    width: calc(10vw + 10vh);
+    height: calc(10vw + 10vh);
+}
+
+div > #qrBox > #qrCode {
+    display: block;
+    width: 100% !important;
+    height: 100% !important;
+}
+
+.leaflet-control > #box > #blockFullInfo {
+    border-top: 3px solid;
+}
+
+.leaflet-control > #box > #blockFullInfo > #objInfo {
+    display: flex;
+    flex-wrap: normal;
+    margin-top: 5px;
+}
+
+.leaflet-control > #box > #blockFullInfo > #objInfo > div > hr {
+    border-width: 0px;
+    height: 4px;
+    border-style: solid;
+    width: 60%;
+}
+
+.leaflet-control > #box > #blockFullInfo > #objInfo > div {
+    width: 100%;
+}
+
+.leaflet-control > #box > #blockFullInfo > #objInfo > div > #imgShare {
+    width: 50px;
+    height: 50px;
+}
+
+.leaflet-control > #box > #blockFullInfo > #objInfo > div > .text {
+    font-family: Nunito-Regular;
+    font-size: calc(1vh + 1vw);
+    margin: auto;
+    z-index: 4;
+    text-align: center;
+    white-space: normal;
+    word-wrap: break-word;
+    cursor: text;
+}
+
+.leaflet-control > #box > #blockFullInfo > #objInfo > div > #boxBtn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.leaflet-control > #box > #blockFullInfo > #objInfo > div > #boxBtn > button {
+    font-size: 20px;
+    width: 90%;
+    text-align: center;
+    margin-top: 16px;
+    white-space: normal;
+    word-wrap: break-word;
+    border: 2px solid #131313;
+    border-radius: 5px;
+    margin-bottom: 5%;
+    transition: 1s;
+}
+
+.leaflet-control > #box > #blockFullInfo > #objDescription > div > .text {
+    font-family: Nunito-Regular;
+    font-size: calc(1.2vh + 1.2vw);
+    margin: auto;
+    z-index: 4;
+    text-align: center;
+    white-space: normal;
+    word-wrap: break-word;
+    cursor: default;
+}
+
+.leaflet-control > #box > #blockFullInfo > #objDescription > div > button {
+    font-family: Nunito-Regular;
+    font-size: calc(1vh + 1vw);
+    margin: auto;
+    z-index: 4;
+    text-align: center;
+    white-space: normal;
+    word-wrap: break-word;
+    cursor: default;
+    border: 3px solid black;
+    border-radius: 10px;
+    padding: 6px;
+    width: 80%;
+    display: flex;
+    margin-bottom: 20px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    transition: 1s;
+}
+
+.leaflet-control > #box > #blockFullInfo > #objDescription > div > button:hover {
+    box-shadow: 0 0 0 1px #000000 inset, 0 0 0 2px white inset;
+    transition: 0.1s;
+    cursor: pointer;
+}
+
+.leaflet-control > #box > #blockFullInfo > #objDescription > div > button:active {
+    box-shadow: 0 0 0 2px white inset, 0 0 0 4px #000000 inset;
+    transition: 0.1s;
+    cursor: pointer;
+}
+
+.leaflet-control > #box > #blockFullInfo > #objDescription > div > hr {
+    border-width: 0px;
+    height: 4px;
+    border-style: solid;
+    width: 60%;
+}
+
+.leaflet-control > #box > #blockShare {
+    border-top: 3px solid;
+}
+
+.leaflet-control > #box > #blockShare > #objShare > div > hr {
+    border-width: 0px;
+    height: 4px;
+    border-style: solid;
+    width: 60%;
+}
+
+.leaflet-control > #box > #blockSearch > #boxInput {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.leaflet-control > #box > #blockSearch > #boxInput > input {
+    font-family: Nunito-Regular;
+    font-size: calc(1vh + 1vw);
+    margin: calc(0.5vh + 0.5vw);
+    outline: none;
+    text-align: center;
+    white-space: normal;
+    word-wrap: break-word;
+    border: 3px solid #000000;
+    border-radius: 5px;
+    width: 60%;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+}
+
+.leaflet-control > #box > #blockSearch > #boxInput > .light::placeholder {
+    color: #ffffff;
+}
+
+.leaflet-control > #box > #blockSearch > #boxInput > .dark::placeholder {
+    color: #313131;
+}
+
+@keyframes loadingKeyFrames {
+    0% {
+        transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+#blockSearch {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-self: center;
+    justify-items: center;
+    justify-content: center;
+    margin: 0px;
+    text-align: center;
+}
+
+#blockSearch > .text {
+    font-family: Nunito-Regular;
+    font-size: calc(1vh + 1vw);
+    margin: auto;
+    z-index: 4;
+    text-align: center;
+    white-space: normal;
+    word-wrap: break-word;
+    cursor: default;
+}
+
+#blockSearch > .boxSelect > select {
+    font-family: Nunito-Regular;
+    font-size: calc(1vh + 1vw);
+    margin: auto;
+    z-index: 4;
+    text-align: center;
+    white-space: normal;
+    word-wrap: break-word;
+    display: none;
+}
+
+#objShare > #boxShare > #boxText {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    justify-self: center;
+    justify-items: center;
+    justify-content: center;
+    margin: 0px;
+    text-align: center;
+    align-items: center;
+}
+
+#objShare > #boxShare > #boxText > .text {
+    font-family: Nunito-Regular;
+    font-size: calc(1vh + 1vw);
+    margin: auto;
+    z-index: 4;
+    text-align: right;
+    font-weight: bold;
+    cursor: default;
+    justify-self: center;
+    display: flex;
+}
+
+#objShare > #boxShare > #boxText > #qrBox {
+    display: flex;
+    justify-self: center;
+}
+
+#objShare > #boxShare > #boxText > svg {
+    cursor: pointer;
+    width: 50px !important;
+    display: flex;
+    justify-self: center;
+}
+
+.boxSelect {
+    display: flex;
+}
+
+.boxSelect > select {
+    margin-bottom: 10px;
+}
+
+.leaflet-control > #box > #blockFullInfo > hr {
+    border-width: 0px;
+    height: 4px;
+    border-style: solid;
+    width: 60%;
+}
+
+.leaflet-control > #box > #blockRoutes {
+    border-top: 3px solid;
+}
+
+.leaflet-control > #box > #blockRoutes > hr {
+    border-width: 0px;
+    height: 4px;
+    border-style: solid;
+    width: 60%;
+}
+
+.leaflet-control > #box > #blockRoutes > div {
+    padding-bottom: 5px;
+    display: flex;
+    flex-flow: column;
+    align-items: center;
+    padding-top: 5px;
+}
+
+.leaflet-control > #box > #blockRoutes > div > div {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.leaflet-control > #box > #blockRoutes > div > div > input {
+    font-family: Nunito-Regular;
+    width: 60%;
+    height: 100%;
+    border: 3px solid rgb(255, 255, 255);
+    border-radius: 5px;
+    text-align: center;
+    outline: 0px;
+    font-size: calc(1vh + 1vw);
+    display: block;
+    margin: calc(0.5vh + 0.5vw);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+}
+
+.leaflet-control > #box > #blockRoutes > div > div > .light::placeholder {
+    color: #ffffff;
+}
+
+.leaflet-control > #box > #blockRoutes > div > div > .dark::placeholder {
+    color: #313131;
+}
+
+.leaflet-control > #box > #blockShare > hr {
+    border-width: 0px;
+    height: 4px;
+    border-style: solid;
+    width: 60%;
+}
+
+.leaflet-control > #box > #blockFullInfo > .text {
+    font-family: Nunito-Regular;
+    font-weight: bold;
+    font-size: calc(1vh + 1vw);
+    margin: auto;
+    z-index: 4;
+    text-align: center;
+    white-space: normal;
+    word-wrap: break-word;
+    cursor: pointer;
+}
+
+.leaflet-control > #box > #blockRoutes > .text {
+    font-family: Nunito-Regular;
+    font-weight: bold;
+    font-size: calc(1vh + 1vw);
+    margin: auto;
+    z-index: 4;
+    text-align: center;
+    white-space: normal;
+    word-wrap: break-word;
+    cursor: pointer;
+}
+
+.leaflet-control > #box > .box-block:last-child {
+    border-radius: 0px 0px 5px 5px;
+}
+
+.leaflet-control > #box > #blockShare > .text {
+    font-family: Nunito-Regular;
+    font-weight: bold;
+    font-size: calc(1vh + 1vw);
+    margin: auto;
+    z-index: 4;
+    text-align: center;
+    white-space: normal;
+    word-wrap: break-word;
+    cursor: pointer;
+}
+
+.leaflet-control > #box > #blockFullInfo > #objDescription > div > .text {
+    font-family: Nunito-Regular;
+    font-size: calc(0.9vh + 1vw);
+    margin: auto;
+    margin-bottom: 10px;
+    z-index: 4;
+    text-align: center;
+    white-space: normal;
+    word-wrap: break-word;
+    border-width: 0px !important;
+    width: 85%;
+    max-width: 85%;
+    min-width: 85%;
+    min-height: 20px;
+    max-height: 115px;
+    display: flex;
+    align-self: center;
+    outline: none;
+    -moz-appearance: none;
+    resize: none;
+    overflow-x: hidden;
+    cursor: default !important;
+}
+
+.leaflet-routing-container {
+    display: none;
+}
+
+#boxMenHere {
+    margin-top: 20px;
+    margin-right: 10px;
+    float: right;
+    width: calc(1.8vh + 1.8vw);
+    height: calc(1.8vh + 1.8vw);
+    border: 3px solid #f3f3f3;
+    border-radius: 6px;
+    box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.6);
+    cursor: pointer;
+}
+
+#boxMenHere > svg {
+    margin: 5px;
+}
+
+#boxMopClear {
+    margin-right: 10px;
+    width: calc(1.8vh + 1.8vw);
+    height: calc(1.8vh + 1.8vw);
+    border: 3px solid #f3f3f3;
+    border-radius: 6px;
+    cursor: pointer;
+}
+
+#boxMopClear > svg {
+    margin: 5px;
+}
+
+#boxMagnifySearch {
+    margin-right: 10px;
+    width: calc(1.8vh + 1.8vw);
+    height: calc(1.8vh + 1.8vw);
+    border: 3px solid #f3f3f3;
+    border-radius: 6px;
+    cursor: pointer;
+}
+
+#boxMagnifySearch > svg {
+    margin: 5px;
+}
+
+.react-stars {
+    margin: auto;
+    padding-top: 0px;
+    margin-top: -15px;
+    margin-bottom: -10px;
+}
+
+input::-webkit-calendar-picker-indicator {
+    opacity: 1;
+    display: flexbox !important;
+}
+
+@media (max-width: 480px) {
+    .leaflet-container {
+        height: calc(100%) !important;
+        width: 100vw;
+    }
+
+    #map > #blockScroll {
+        height: calc(100% - (5.2vh + 5.2vw + 4px));
+        overflow-y: auto;
+        overflow-x: hidden;
+        bottom: 0px;
+        width: 100%;
+        position: absolute;
+    }
+
+    #map > #blockScroll > #body {
+        height: 100%;
+        width: 100%;
+    }
+
+    #boxMenHere {
+        width: 40px !important;
+        height: 40px !important;
+    }
+
+    #boxMopClear {
+        width: 30px !important;
+        height: 30px !important;
+    }
+
+    #boxMagnifySearch {
+        width: 30px !important;
+        height: 30px !important;
+    }
+
+    //
+
+    #map > #blockScroll > #body > #loading:after {
+        width: calc(15vw + 15vh);
+        height: calc(15vw + 15vh);
+    }
+
+    .leaflet-control > #box {
+        width: 200px;
+    }
+
+    div > #qrBox {
+        width: 60px !important;
+        height: 60px !important;
+    }
+
+    div > #qrBox > #qrCode {
+        width: 100% !important;
+        height: 100% !important;
+    }
+
+    .leaflet-control > #box > #blockFullInfo > #objInfo > div > hr {
+        height: 4px;
+    }
+
+    .leaflet-control > #box > #blockFullInfo > #objInfo > div > .text {
+        font-size: 16px;
+    }
+
+    .leaflet-control > #box > #blockFullInfo > #objDescription > div > .text {
+        font-size: 16px;
+    }
+
+    .leaflet-control > #box > #blockSearch > #boxInput > input {
+        font-size: 16px;
+    }
+
+    .leaflet-control > #box > #blockSearch > #boxInput > .light::placeholder {
+        color: #ffffff;
+    }
+
+    .leaflet-control > #box > #blockSearch > #boxInput > .dark::placeholder {
+        color: #313131;
+    }
+
+    @keyframes loadingKeyFrames {
+        0% {
+            transform: rotate(0deg);
+        }
+        100% {
+            transform: rotate(360deg);
+        }
+    }
+
+    #blockSearch > .text {
+        font-size: 16px;
+    }
+
+    #blockSearch > .boxSelect > select {
+        font-size: 16px;
+    }
+
+    #objShare > #boxShare > #boxText > .text {
+        font-size: 16px;
+    }
+
+    #objShare > #boxShare > #boxText > svg {
+        width: 40px !important;
+    }
+
+    .leaflet-control > #box > #blockFullInfo > hr {
+        height: 4px;
+    }
+
+    .leaflet-control > #box > #blockRoutes > div > div > input {
+        font-family: Nunito-Regular;
+        width: 60%;
+        height: 100%;
+        border: 3px solid rgb(255, 255, 255);
+        border-radius: 5px;
+        text-align: center;
+        outline: 0px;
+        font-size: 16px;
+        display: block;
+        margin: calc(0.5vh + 0.5vw);
+    }
+
+    .leaflet-control > #box > #blockFullInfo > .text {
+        font-size: 16px;
+    }
+
+    .leaflet-control > #box > #blockRoutes > .text {
+        font-size: 16px;
+    }
+
+    .leaflet-control > #box > #blockShare > .text {
+        font-size: 16px;
+    }
+
+    .leaflet-control > #box > #blockFullInfo > #objDescription > div > .text {
+        font-size: 16px !important;
+    }
+
+    .leaflet-control > #box > #blockFullInfo > #objDescription > div > button {
+        font-size: 16px;
+    }
+}
