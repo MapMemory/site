@@ -12,21 +12,28 @@
 }
 
 #header > .logo {
-    width: 80px;
-    height: 80px;
+    width: calc(3.2vh + 3.2vw);
+    height: calc(3.2vh + 3.2vw);
+    cursor: pointer;
 }
 
 #header > .menu {
-    width: 80px;
-    height: 80px;
+    width: calc(3.2vh + 3.2vw);
+    height: calc(3.2vh + 3.2vw);
+    cursor: pointer;
 }
 
 #header > .menu:hover {
     transition: 0.1s;
-    cursor: pointer;
 }
 
-#header > .name {
+#header > div {
+    margin-top: auto;
+    margin-bottom: auto;
+    width: 100%;
+}
+
+#header > div > .name {
     display: block;
     flex-basis: 0;
     flex-grow: 1;
@@ -34,22 +41,26 @@
     padding-left: 0px;
     margin-top: auto;
     margin-bottom: auto;
-    font-size: 35px;
+    font-size: calc(1.6vh + 1.6vw);
     color: rgb(0, 0, 0);
+    transition: 1s;
+    cursor: pointer;
+    width: min-content;
 }
 
-@media (max-width: 940px) {
+@media (max-width: 480px) {
     #header > .logo {
-        width: 60px;
-        height: 60px;
+        width: calc(5.2vh + 5.2vw);
+        height: calc(5.2vh + 5.2vw);
     }
 
     #header > .menu {
-        width: 60px;
-        height: 60px;
+        width: calc(5.2vh + 5.2vw);
+        height: calc(5.2vh + 5.2vw);
     }
 
-    #header > .name {
-        font-size: 25px;
+    #header > div > .name {
+        font-size: calc(2.6vh + 2.6vw);
+        transition: 1s;
     }
 }

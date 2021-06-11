@@ -1,19 +1,21 @@
 #menu {
-    height: calc(100vh - 83px);
+    height: calc(100% - (3.2vh + 3.2vw + 4px));
     overflow-y: auto;
     overflow-x: hidden;
     bottom: 0px;
     width: 100%;
     position: absolute;
+    transition: 1s;
 }
 
 #menu > #boxChoice {
     display: flex;
     flex-direction: row;
-    flex-wrap: wrap;
+    flex-wrap: nowrap;
     z-index: 5;
     height: 100%;
     width: 100%;
+    overflow-y: auto;
 }
 
 #menu > #boxChoice > .block {
@@ -37,6 +39,7 @@
     align-items: center;
     display: flex;
     padding: 6px;
+    transition: 1s;
 }
 
 #menu > #boxChoice > .block > .front > button:hover {
@@ -52,13 +55,13 @@
 }
 
 #menu > #boxChoice > .block > .front > button > svg {
-    height: 20vh;
-    width: 10vw;
+    width: calc(5.2vh + 5.2vw);
+    height: calc(5.2vh + 5.2vw);
 }
 
-@media (max-width: 940px) {
+@media (max-width: 480px) {
     #menu {
-        height: calc(100vh - 63px);
+        height: calc(100% - (5.2vh + 5.2vw + 4px));
         overflow-y: auto;
         overflow-x: hidden;
         bottom: 0px;
@@ -69,14 +72,15 @@
     #menu > #boxChoice {
         display: flex;
         flex-direction: column;
-        flex-wrap: wrap;
+        flex-wrap: nowrap;
         z-index: 5;
         height: 100%;
         width: 100%;
+        overflow-y: auto;
     }
 
     #menu > #boxChoice > .block:first-child {
-        margin-top: 20px;
+        margin-top: 15px;
     }
 
     #menu > #boxChoice > .block {
@@ -86,6 +90,9 @@
     #menu > #boxChoice > .block > .front {
         z-index: 3;
         align-self: center;
+        width: 100vw;
+        display: flex;
+        justify-content: center;
     }
 
     #menu > #boxChoice > .block > .front > button {
@@ -102,10 +109,11 @@
         align-items: center;
         display: flex;
         padding: 6px;
+        transition: 1s;
+        justify-content: center;
     }
 
     #menu > #boxChoice > .block > .front > button > svg {
-        height: calc(100vh / 12);
-        width: 80vw;
+        justify-content: center;
     }
 }

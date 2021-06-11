@@ -51,6 +51,7 @@
     border: 3px solid black;
     border-radius: 10px;
     padding: 6px;
+    transition: 1s;
 }
 
 #download > #blockScroll > #body > #Smartphone > .block > .front > button:hover {
@@ -79,19 +80,19 @@
     font-size: calc(2.6vh + 2.6vw);
 }
 
-@media (max-width: 940px) {
+@media (max-width: 480px) {
     #download > #blockScroll > #body > #Smartphone > .block {
         display: flex;
         z-index: 2;
-        height: calc(17vh + 17vw);
         padding-bottom: 2vh;
+        flex-direction: column;
+        height: 100%;
     }
 
     #download > #blockScroll > #body > #Smartphone > .block {
         display: flex;
         flex-direction: column;
         z-index: 2;
-        height: calc(25vh + 25vw);
         padding-bottom: 2vh;
     }
 
@@ -117,6 +118,7 @@
         border: 3px solid black;
         border-radius: 10px;
         margin-top: 10px;
+        transition: 1s;
     }
 
     #download > #blockScroll > #body > #Smartphone > .block > .back {
@@ -125,14 +127,16 @@
         height: 60%;
         width: 60%;
         margin: 0px;
+        padding-bottom: 20px;
     }
 
     #download > #blockScroll > #body > #Smartphone > .block > .back > .image-object {
         align-self: center;
         flex-direction: column;
         height: 60%;
-        width: 100%;
+        width: 60%;
         float: right;
+        margin: auto;
     }
 }
 
@@ -181,6 +185,7 @@
     border: 3px solid black;
     border-radius: 10px;
     padding: 6px;
+    transition: 1s;
 }
 
 #download > #blockScroll > #body > #Desktop > .block > .front > button:hover {
@@ -209,12 +214,12 @@
     margin: 0px;
 }
 
-@media (max-width: 940px) {
+@media (max-width: 480px) {
     #download > #blockScroll > #body > #Desktop > .block {
         display: flex;
         flex-direction: column;
         z-index: 2;
-        height: calc(25vh + 25vw);
+        height: 100%;
         padding-bottom: 2vh;
     }
 
@@ -240,6 +245,7 @@
         border: 3px solid black;
         border-radius: 10px;
         margin-top: 10px;
+        transition: 1s;
     }
 
     #download > #blockScroll > #body > #Desktop > .block > .back {
@@ -248,13 +254,15 @@
         height: 60%;
         width: 60%;
         margin: 0px;
+        padding-bottom: 20px;
     }
 
     #download > #blockScroll > #body > #Desktop > .block > .back > .image-object {
         align-self: center;
         flex-direction: column;
         height: 60%;
-        width: 100%;
+        width: 60%;
         float: right;
+        margin: auto;
     }
 }

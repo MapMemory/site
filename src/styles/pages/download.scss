@@ -1,5 +1,5 @@
 #download > #blockScroll {
-    height: calc(100vh - 83px);
+    height: calc(100% - (3.2vh + 3.2vw + 4px));
     overflow-y: auto;
     overflow-x: hidden;
     bottom: 0px;
@@ -7,9 +7,9 @@
     position: absolute;
 }
 
-@media (max-width: 940px) {
+@media (max-width: 480px) {
     #download > #blockScroll {
-        height: calc(100vh - 63px);
+        height: calc(100% - (5.2vh + 5.2vw + 4px));
         overflow-y: auto;
         overflow-x: hidden;
         bottom: 0px;

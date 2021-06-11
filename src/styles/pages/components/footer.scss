@@ -1,14 +1,15 @@
 #footer {
     padding: 3rem 3.5rem 6rem;
     background-color: rgb(49, 49, 49);
-    line-height: 22px;
-    font-size: 25px;
+    line-height: calc(0.96vh + 0.96vw);
+    font-size: calc(0.96vh + 0.96vw);
     color: white;
     font-family: Nunito-ExtraBold;
     box-shadow: 0 0 15px rgba(0, 0, 0, 0.6);
     border-top: 4px solid black;
     z-index: 999;
     text-align: center;
+    transition: 1s;
 }
 
 #footer > .container {
@@ -34,8 +35,10 @@
     color: #e9e9e9;
     display: block;
     font-weight: 600;
+    font-size: calc(1vh + 1vw);
     margin-bottom: 12px;
     font-family: Nunito-ExtraBold;
+    transition: 1s;
 }
 
 #footer > .container > .columns > .column > ul {
@@ -46,7 +49,9 @@
 
 #footer > .container > .columns > .column > ul > li {
     font-family: Nunito-Regular;
+    font-size: calc(1vh + 1vw);
     padding-top: 5px;
+    transition: 1s;
 }
 
 #footer > .container > .columns > .column > ul > li:hover {
@@ -55,19 +60,24 @@
     cursor: pointer;
 }
 
+#footer > .container > .columns > .group-columns > div {
+    transition: 1s;
+}
+
 #footer > li {
     display: list-item;
     text-align: -webkit-match-parent;
 }
 
-@media (max-width: 940px) {
+@media (max-width: 480px) {
     #footer {
         padding: 1.5rem 3.5rem 1.8rem;
+        line-height: calc(2vh + 2vw);
     }
 
     #footer > .container > .columns > .column {
         display: none;
-        font-size: 20px;
+        font-size: calc(0.96vh + 0.96vw);
     }
 
     #footer > .container > .columns > .group-columns {
@@ -75,12 +85,12 @@
     }
 
     #footer > .container > .columns > .group-columns > span {
-        font-size: 20px;
+        font-size: calc(1.8vh + 1.8vw);
         text-align: center;
     }
 
     #footer > .container > .columns > .group-columns > div {
-        font-size: 20px;
+        font-size: calc(1.8vh + 1.8vw);
         text-align: center;
     }
 }

@@ -87,7 +87,7 @@
     font-size: calc(2.8vh + 2.8vw);
 }
 
-@media (max-width: 940px) {
+@media (max-width: 480px) {
     #preview > #blockScroll > #body > .present > .block-left {
         display: flex;
         z-index: 2;

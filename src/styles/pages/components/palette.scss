@@ -21,6 +21,7 @@
     height: 100%;
     width: 50%;
     float: left;
+    border: 1px solid #000000;
 }
 
 #themes > #blockScroll > #body > .palette > .block > .front {
@@ -52,6 +53,7 @@
     border: 3px solid black;
     border-radius: 10px;
     padding: 6px;
+    transition: 1s;
 }
 
 #themes > #blockScroll > #body > .palette > .block > .front > #boxBtn > button:hover {
@@ -66,7 +68,7 @@
     cursor: pointer;
 }
 
-@media (max-width: 940px) {
+@media (max-width: 480px) {
     #themes > #blockScroll > #body > .palette > .block {
         display: flex;
         z-index: 2;
@@ -84,8 +86,10 @@
         align-self: center;
         flex-direction: column;
         width: 50%;
+        height: 16vh;
         float: left;
         height: inherit;
+        border: 1px solid #000000;
     }
 
     #themes > #blockScroll > #body > .palette > .block > .front {
@@ -115,5 +119,6 @@
         border: 3px solid black;
         border-radius: 10px;
         margin-top: 10px;
+        transition: 1s;
     }
 }
