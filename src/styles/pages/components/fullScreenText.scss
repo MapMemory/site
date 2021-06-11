@@ -1,0 +1,103 @@
+#fullScreenText {
+    height: calc(100% - (3.2vh + 3.2vw + 4px));
+    overflow-y: auto;
+    overflow-x: hidden;
+    bottom: 0px;
+    width: 100%;
+    position: absolute;
+    display: none;
+    z-index: 9999;
+    transition: 1s;
+}
+
+#fullScreenText > #blockScrollST {
+    height: 100%;
+    overflow-y: auto;
+    overflow-x: hidden;
+    bottom: 0px;
+    width: 100%;
+    position: absolute;
+    display: block;
+}
+
+#fullScreenText > #blockScrollST > div {
+    display: flex;
+    height: 100%;
+    width: 100%;
+    flex-flow: column;
+}
+
+#fullScreenText > #blockScrollST > div > div {
+    display: grid;
+    height: 100%;
+    width: 100%;
+}
+
+#fullScreenText > #blockScrollST > div > div > p {
+    // height: 100%;
+    overflow-y: auto;
+    overflow-x: hidden;
+    bottom: 0px;
+    // width: 100%;
+    text-align: center;
+    display: table-cell !important;
+    vertical-align: middle;
+    z-index: 99999;
+    font-family: Nunito-Regular;
+    font-size: calc(1vh + 1vw) !important;
+    padding: 30px;
+    margin: 0px;
+    padding-top: 10px;
+    align-self: center;
+}
+
+#fullScreenText > #blockScrollST > div > button {
+    height: 10%;
+    font-family: Nunito-Bold;
+    font-size: calc(1.1vh + 1.1vw);
+    z-index: 4;
+    text-align: center;
+    background-color: #ffffff;
+    border: 0px solid black;
+    border-top: 2px solid black;
+    border-radius: 0px;
+    box-shadow: 15px 0px 0px rgba(0, 0, 0, 0.6);
+    transition: 1s;
+}
+
+#fullScreenText > #blockScrollST > div > button:hover {
+    box-shadow: 0 0 0 1px #000000 inset, 0 0 0 2px white inset;
+    transition: 0.1s;
+    cursor: pointer;
+}
+
+#fullScreenText > #blockScrollST > div > button:active {
+    box-shadow: 0 0 0 2px white inset, 0 0 0 4px #000000 inset;
+    transition: 0.1s;
+    cursor: pointer;
+}
+
+@media (max-width: 480px) {
+    #fullScreenText {
+        height: calc(100% - (5.2vh + 5.2vw + 4px));
+    }
+
+    #fullScreenText > #blockScrollST > div > button {
+        height: 15%;
+        font-family: Nunito-Bold;
+        font-size: calc(2.2vh + 2.2vw);
+        z-index: 4;
+        text-align: center;
+        background-color: #ffffff;
+        border: 0px solid black;
+        border-top: 2px solid black;
+        border-radius: 0px;
+        transition: 1s;
+    }
+
+    #fullScreenText > #blockScrollST > div > div > p {
+        font-family: Nunito-Regular;
+        font-size: calc(1.8vh + 1.8vw) !important;
+        text-align: center;
+    }
+}
