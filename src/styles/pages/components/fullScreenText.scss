@@ -34,11 +34,9 @@
 }
 
 #fullScreenText > #blockScrollST > div > div > p {
-    // height: 100%;
     overflow-y: auto;
     overflow-x: hidden;
     bottom: 0px;
-    // width: 100%;
     text-align: center;
     display: table-cell !important;
     vertical-align: middle;
