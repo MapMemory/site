@@ -1,5 +1,5 @@
 #privacy > #blockScroll {
-    height: calc(100% - (3.2vh + 3.2vw + 4px));
+    height: calc(100% - (3.2vh + 3.2vw + 3.6px));
     overflow-y: auto;
     overflow-x: hidden;
     bottom: 0px;
@@ -37,7 +37,7 @@
 
 @media (max-width: 480px) {
     #privacy > #blockScroll {
-        height: calc(100% - (5.2vh + 5.2vw + 4px));
+        height: calc(100% - (5.2vh + 5.2vw + 3.6px));
         overflow-y: auto;
         overflow-x: hidden;
         bottom: 0px;
