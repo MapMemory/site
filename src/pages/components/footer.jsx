@@ -43,7 +43,7 @@ export default () => {
                     <div className="column">
                         <strong style={person.getThemeColors().text}>Помощь</strong>
                         <ul>
-                            <li onClick={() => window.open('mailto:test@example.com?subject=subject&body=body')} style={person.getThemeColors().text}>Служба поддержки</li>
+                            <li onClick={() => window.open('mailto:mapmemory@protonmail.com?subject=Кратко о проблеме&body=Подробнее о проблеме')} style={person.getThemeColors().text}>Служба поддержки</li>
                         </ul>
                     </div>
                 </div>
