@@ -101,7 +101,7 @@ export default class extends React.Component {
 
         let imgsUrl = await server.getImgsOfObject({ scheme: object.id_scheme, id: object.id });
 
-        let shortenURL = await TinyURL.shorten(`${CONSTANTS.SITE_ADDRESS}/map?scheme=${object.id_scheme}&id=${object.id}`);
+        let shortenURL = await TinyURL.shorten(`${CONSTANTS.SITE_ADDRESS}/map?scheme=${object.id_scheme}&id=${object.id}&temp=${Math.floor(Math.random() * 1000)}`);
 
         if (object.id_scheme === 1) {
             ReactDOM.render(<this.Monumentinfo state={this.state} person={person} object={object} imgsUrl={imgsUrl} />, document.getElementById('objInfo'));
