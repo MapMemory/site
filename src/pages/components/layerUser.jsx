@@ -195,7 +195,7 @@ export default class extends React.Component {
                         let index = state.objects.monuments.findIndex((monument) => monument.id === object.id && monument.id_scheme === object.id_scheme);
                         state.objects.monuments[index].rating = newRating;
                     }}
-                    size={(state.width >= 940) ? 45 : 30}
+                    size={(state.width >= 940) ? 42 : 30}
                     isHalf={true}
                     value={object.rating}
                     emptyIcon={<i className="far fa-star"></i>}
@@ -230,7 +230,7 @@ export default class extends React.Component {
                         let index = state.objects.tables.findIndex((table) => table.id === object.id && table.id_scheme === object.id_scheme);
                         state.objects.tables[index].rating = newRating;
                     }}
-                    size={(state.width >= 940) ? 45 : 30}
+                    size={(state.width >= 940) ? 42 : 30}
                     isHalf={true}
                     value={object.rating}
                     emptyIcon={<i className="far fa-star"></i>}
@@ -265,7 +265,7 @@ export default class extends React.Component {
                         let index = state.objects.streets.findIndex((street) => street.id === object.id && street.id_scheme === object.id_scheme);
                         state.objects.streets[index].rating = newRating;
                     }}
-                    size={(state.width >= 940) ? 45 : 30}
+                    size={(state.width >= 940) ? 42 : 30}
                     isHalf={true}
                     value={object.rating}
                     emptyIcon={<i className="far fa-star"></i>}
