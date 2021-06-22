@@ -18,7 +18,7 @@ export default ({ text }) => {
                             color: person.getThemeColors().text.color, backgroundColor: person.getThemeColors().backgoundColorFirst.backgroundColor
                         }}>{text}</p>
                     </div>
-                    <button onClick={handleHideDescription}>Вернуться</button>
+                    <button style={{ backgroundColor: person.getThemeColors().headerColorPrimary.backgroundColor, color: person.getThemeColors().text.color }} onClick={handleHideDescription}>Вернуться</button>
                 </div>
             </div>
         </div>
