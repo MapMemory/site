@@ -80,7 +80,7 @@ function Body() {
                                         direction: monument.direction,
                                         lat: monument.lat,
                                         long: monument.long,
-                                        images: '',
+                                        images: [],
                                         isDeleted: false
                                     }));
 
@@ -93,7 +93,7 @@ function Body() {
                                         direction: table.direction,
                                         lat: table.lat,
                                         long: table.long,
-                                        images: '',
+                                        images: [],
                                         isDeleted: false
                                     }));
 
@@ -109,7 +109,7 @@ function Body() {
                                         start_long: street.start_long,
                                         end_lat: street.end_lat,
                                         end_long: street.end_long,
-                                        images: '',
+                                        images: [],
                                         isDeleted: false
                                     }));
 

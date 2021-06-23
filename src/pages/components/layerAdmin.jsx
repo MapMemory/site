@@ -19,13 +19,11 @@ import ImgMapYouLight from '../../assets/images/svg/mapYouLight.svg';
 import { ReactComponent as ImgCommitChanges } from '../../assets/images/svg/commitChanges.svg';
 import { ReactComponent as ImgDeletePoint } from '../../assets/images/svg/deletePoint.svg';
 import { ReactComponent as ImgMop } from '../../assets/images/svg/mop.svg';
-import { ReactComponent as ImgMagnify } from '../../assets/images/svg/magnify.svg';
 import { ReactComponent as ImgExchange } from '../../assets/images/svg/exchange.svg';
 import { ReactComponent as ImgUpload } from '../../assets/images/svg/upload.svg';
 import { ReactComponent as ImgManHere } from '../../assets/images/svg/manHere.svg';
 
 import Person from '../../utils/person.jsx';
-import Server from '../../utils/server.jsx';
 
 export default class extends React.Component {
     constructor({ markers, points }) {
@@ -34,6 +32,9 @@ export default class extends React.Component {
         this.state = {
             isMapInit: false,
             isYourLocation: false,
+            isSelectStreetTo: false,
+            isSelectPoint: false,
+            isUpdatedStreet: false,
             markers: markers,
             tempObj: null,
             points: points,
@@ -52,6 +53,8 @@ export default class extends React.Component {
     }
 
     async openInfo(idx) {
+        this.updateStreet(true);
+
         if (idx.split('|').length == 1)
             this.setState({ tempObj: this.state.points.find((point) => point.idx == idx) });
 
@@ -110,12 +113,12 @@ export default class extends React.Component {
 
         let person = new Person();
 
-        ReactDOM.render(<this.ObjectInfo person={person} object={this.state.tempObj} type={this.state.tempObj.type} />, document.getElementById('objInfo'));
+        ReactDOM.render(<this.ObjectInfo state={this.state} person={person} object={this.state.tempObj} type={this.state.tempObj.type} />, document.getElementById('objInfo'));
     }
 
     downloadTxtFile = () => {
         const element = document.createElement("a");
-        const file = new Blob([JSON.stringify({ markers: this.state.markers, points: this.state.points })], { type: 'text/plain' });
+        const file = new Blob([JSON.stringify(this.state.points)], { type: 'text/plain' });
         element.href = URL.createObjectURL(file);
         element.download = "Информация.txt";
         document.body.appendChild(element);
@@ -133,9 +136,11 @@ export default class extends React.Component {
             this.state.tempObj.name = document.getElementById('infoMonumentName').value;
             this.state.tempObj.description = document.getElementById('infoMonumentDescription').value;
             this.state.tempObj.direction = document.getElementById('infoMonumentDirection').value;
-            this.state.tempObj.images = document.getElementById('infoMonumentPictures').value;
-            this.state.tempObj.lat = document.getElementById('infoMonumentLatLong').value.slice(1, -1).split(', ')[0];
-            this.state.tempObj.long = document.getElementById('infoMonumentLatLong').value.slice(1, -1).split(', ')[1];
+
+            const inputInfoMonumentPictures = document.getElementById('inputInfoMonumentPictures');
+            for (let index = 0; index < inputInfoMonumentPictures.files.length; index++) {
+                this.state.tempObj.images.push(inputInfoMonumentPictures.files[index])
+            }
 
             index = this.state.points.findIndex((point) => point.idx == this.state.tempObj.idx);
 
@@ -147,9 +152,11 @@ export default class extends React.Component {
             this.state.tempObj.name = document.getElementById('infoTableName').value;
             this.state.tempObj.description = document.getElementById('infoTableDescription').value;
             this.state.tempObj.direction = document.getElementById('infoTableDirection').value;
-            this.state.tempObj.images = document.getElementById('infoTablePictures').value;
-            this.state.tempObj.lat = document.getElementById('infoTableLatLong').value.slice(1, -1).split(', ')[0];
-            this.state.tempObj.long = document.getElementById('infoTableLatLong').value.slice(1, -1).split(', ')[1];
+
+            const inputInfoTablePictures = document.getElementById('inputInfoTablePictures');
+            for (let index = 0; index < inputInfoTablePictures.files.length; index++) {
+                this.state.tempObj.images.push(inputInfoTablePictures.files[index])
+            }
 
             index = this.state.points.findIndex((point) => point.idx == this.state.tempObj.idx);
 
@@ -162,9 +169,11 @@ export default class extends React.Component {
             this.state.tempObj.new_name = document.getElementById('infoStreetOldName').value;
             this.state.tempObj.description = document.getElementById('infoStreetDescription').value;
             this.state.tempObj.direction = document.getElementById('infoStreetDirection').value;
-            this.state.tempObj.images = document.getElementById('infoStreetPictures').value;
-            this.state.tempObj.end_lat = document.getElementById('infoStreetTo').value.slice(1, -1).split(', ')[0];
-            this.state.tempObj.end_long = document.getElementById('infoStreetTo').value.slice(1, -1).split(', ')[1];
+
+            const inputInfoStreetPictures = document.getElementById('inputInfoStreetPictures');
+            for (let index = 0; index < inputInfoStreetPictures.files.length; index++) {
+                this.state.tempObj.images.push(inputInfoStreetPictures.files[index])
+            }
 
             index = this.state.points.findIndex((point) => point.idx == this.state.tempObj.idx);
 
@@ -183,7 +192,7 @@ export default class extends React.Component {
         await this.openInfo(this.state.tempObj.idx);
     }
 
-    ObjectInfo({ person, object, type }) {
+    ObjectInfo({ state, person, object, type }) {
         if (type == 'monument')
             return (
                 <div>
@@ -197,9 +206,20 @@ export default class extends React.Component {
 
                     <textarea id="infoMonumentDirection" class="text" style={{ color: person.getThemeColors().text.color, backgroundColor: person.getThemeColors().headerColorPrimary.backgroundColor }} title="Направление" disabled={false} editable={true} placeholder="Направление">{object.direction}</textarea>
 
-                    <textarea id="infoMonumentPictures" class="text" style={{ color: person.getThemeColors().text.color, backgroundColor: person.getThemeColors().headerColorPrimary.backgroundColor }} title="Список изображений" disabled={false} editable={true} placeholder="Список изображений">{object.images}</textarea>
+                    <input id="inputInfoMonumentPictures" style={{ display: 'none' }} type="file" multiple accept="image/png, image/jpeg" />
 
-                    <textarea id="infoMonumentLatLong" class="text" style={{ color: person.getThemeColors().text.color, backgroundColor: person.getThemeColors().headerColorPrimary.backgroundColor }} title="Позиция" disabled={false} editable={false} placeholder="Позиция" value={'[' + object.lat + ', ' + object.long + ']'}></textarea>
+                    <button style={{ borderColor: person.getThemeColors().text.color, backgroundColor: person.getThemeColors().headerColorPrimary.backgroundColor, color: person.getThemeColors().text.color }} id="btnInfoMonumentPictures" onClick={() => {
+                        var input = document.getElementById('inputInfoMonumentPictures');
+                        input.click();
+                    }}>Выбор изображений</button>
+
+                    <textarea id="infoMonumentLatLong" class="text" style={{ display: 'none', color: person.getThemeColors().text.color, backgroundColor: person.getThemeColors().headerColorPrimary.backgroundColor }} title="Позиция" disabled={false} editable={false} placeholder="Позиция" value={'[' + object.lat + ', ' + object.long + ']'}></textarea>
+
+                    <button style={{ borderColor: person.getThemeColors().text.color, backgroundColor: person.getThemeColors().headerColorPrimary.backgroundColor, color: person.getThemeColors().text.color }} id="btnInfoMonumentLatLong" onClick={() => {
+                        state.isSelectPoint = true;
+                        state.isSelectStreetFrom = false;
+                        state.isSelectStreetTo = false;
+                    }}>Отметить позицию</button>
                 </div >
             );
 
@@ -216,9 +236,20 @@ export default class extends React.Component {
 
                     <textarea id="infoTableDirection" class="text" style={{ color: person.getThemeColors().text.color, backgroundColor: person.getThemeColors().headerColorPrimary.backgroundColor }} title="Направление" disabled={false} editable={true} placeholder="Направление">{object.direction}</textarea>
 
-                    <textarea id="infoTablePictures" class="text" style={{ color: person.getThemeColors().text.color, backgroundColor: person.getThemeColors().headerColorPrimary.backgroundColor }} title="Список изображений" disabled={false} editable={true} placeholder="Список изображений">{object.images}</textarea>
+                    <input id="inputInfoTablePictures" style={{ display: 'none' }} type="file" multiple accept="image/png, image/jpeg" />
 
-                    <textarea id="infoTableLatLong" class="text" style={{ color: person.getThemeColors().text.color, backgroundColor: person.getThemeColors().headerColorPrimary.backgroundColor }} title="Позиция" disabled={false} editable={false} placeholder="Позиция" value={'[' + object.lat + ', ' + object.long + ']'}></textarea>
+                    <button style={{ borderColor: person.getThemeColors().text.color, backgroundColor: person.getThemeColors().headerColorPrimary.backgroundColor, color: person.getThemeColors().text.color }} id="btnInfoTablePictures" onClick={() => {
+                        var input = document.getElementById('inputInfoTablePictures');
+                        input.click();
+                    }}>Выбор изображений</button>
+
+                    <textarea id="infoTableLatLong" class="text" style={{ display: 'none', color: person.getThemeColors().text.color, backgroundColor: person.getThemeColors().headerColorPrimary.backgroundColor }} title="Позиция" disabled={false} editable={false} placeholder="Позиция" value={'[' + object.lat + ', ' + object.long + ']'}></textarea>
+
+                    <button style={{ borderColor: person.getThemeColors().text.color, backgroundColor: person.getThemeColors().headerColorPrimary.backgroundColor, color: person.getThemeColors().text.color }} id="btnInfoTableLatLong" onClick={() => {
+                        state.isSelectPoint = true;
+                        state.isSelectStreetFrom = false;
+                        state.isSelectStreetTo = false;
+                    }}>Отметить позицию</button>
                 </div >
             );
 
@@ -237,18 +268,35 @@ export default class extends React.Component {
 
                     <textarea id="infoStreetDirection" class="text" style={{ color: person.getThemeColors().text.color, backgroundColor: person.getThemeColors().headerColorPrimary.backgroundColor }} title="Направление" disabled={false} editable={true} placeholder="Направление">{object.direction}</textarea>
 
-                    <textarea id="infoStreetPictures" id="infoStreetPictures" class="text" style={{ color: person.getThemeColors().text.color, backgroundColor: person.getThemeColors().headerColorPrimary.backgroundColor }} title="Список изображений" disabled={false} editable={true} placeholder="Список изображений">{object.images}</textarea>
+                    <input id="inputInfoStreetPictures" style={{ display: 'none' }} type="file" multiple accept="image/png, image/jpeg" />
 
-                    <textarea id="infoStreetFrom" class="text" style={{ color: person.getThemeColors().text.color, backgroundColor: person.getThemeColors().headerColorPrimary.backgroundColor }} title="Позиция начала" disabled={false} editable={false} placeholder="Позиция начала" value={'[' + object.start_lat + ', ' + object.start_long + ']'}></textarea>
+                    <button style={{ borderColor: person.getThemeColors().text.color, backgroundColor: person.getThemeColors().headerColorPrimary.backgroundColor, color: person.getThemeColors().text.color }} id="btnInfoStreetPictures" onClick={() => {
+                        var input = document.getElementById('inputInfoStreetPictures');
+                        input.click();
+                    }}>Выбор изображений</button>
 
-                    <textarea id="infoStreetTo" class="text" style={{ color: person.getThemeColors().text.color, backgroundColor: person.getThemeColors().headerColorPrimary.backgroundColor }} title="Позиция конца" disabled={false} editable={false} placeholder="Позиция конца">{'[' + object.end_lat + ', ' + object.end_long + ']'}</textarea>
+                    <textarea id="infoStreetFrom" class="text" style={{ display: 'none', color: person.getThemeColors().text.color, backgroundColor: person.getThemeColors().headerColorPrimary.backgroundColor }} title="Позиция начала" disabled={false} editable={false} placeholder="Позиция начала" value={'[' + object.start_lat + ', ' + object.start_long + ']'}></textarea>
+
+                    <textarea id="infoStreetTo" class="text" style={{ display: 'none', color: person.getThemeColors().text.color, backgroundColor: person.getThemeColors().headerColorPrimary.backgroundColor }} title="Позиция конца" disabled={false} editable={false} placeholder="Позиция конца">{'[' + object.end_lat + ', ' + object.end_long + ']'}</textarea>
+
+                    <button style={{ borderColor: person.getThemeColors().text.color, backgroundColor: person.getThemeColors().headerColorPrimary.backgroundColor, color: person.getThemeColors().text.color }} id="btnInfoStreetFrom" onClick={() => {
+                        state.isSelectPoint = false;
+                        state.isSelectStreetFrom = true;
+                        state.isSelectStreetTo = false;
+                    }}>Отметить начало</button>
+
+                    <button style={{ borderColor: person.getThemeColors().text.color, backgroundColor: person.getThemeColors().headerColorPrimary.backgroundColor, color: person.getThemeColors().text.color }} id="btnInfoStreetTo" onClick={() => {
+                        state.isSelectPoint = false;
+                        state.isSelectStreetFrom = false;
+                        state.isSelectStreetTo = true;
+                    }}>Отметить конец</button>
                 </div >
             );
 
         if (type == 'empty')
             return (
                 <div>
-                    <textarea class="text" style={{ color: person.getThemeColors().text.color, backgroundColor: person.getThemeColors().headerColorPrimary.backgroundColor }} title="Позиция точки" disabled={false} editable={true} placeholder="Позиция точки" value={'[' + object.lat + ', ' + object.lng + ']'}></textarea>
+                    <textarea class="text" style={{ color: person.getThemeColors().text.color, backgroundColor: person.getThemeColors().headerColorPrimary.backgroundColor }} title="Позиция точки" disabled={false} editable={true} placeholder="Позиция точки" value={'[' + object.lat + ', ' + object.long + ']'}></textarea>
                 </div >
             );
 
@@ -277,7 +325,7 @@ export default class extends React.Component {
                     document.getElementById('boxGlobalActions').style.display = 'none';
                     document.getElementById('fullGlobalActionLine').style.display = 'none';
                 }}>Информация</p>
-                <hr style={{ backgroundColor: person.getThemeColors().backgoundColorFirst.backgroundColor, borderColor: person.getThemeColors().backgoundColorFirst.backgroundColor, display: 'none' }} id="fullInfoLine" />
+                <hr style={{ backgroundColor: '#fb9300', borderColor: '#fb9300', display: 'none' }} id="fullInfoLine" />
                 <div style={{ display: 'none' }} id="objInfo">
                 </div>
             </div>
@@ -319,9 +367,9 @@ export default class extends React.Component {
                     name: '',
                     description: '',
                     direction: '',
-                    images: '',
+                    images: [],
                     lat: (this.state.tempObj.lat) ? (this.state.tempObj.lat) : (this.state.tempObj.start_lat),
-                    long: (this.state.tempObj.long) ? (this.state.tempObj.long) : (this.state.tempObj.start_long) ? (this.state.tempObj.start_long) : (this.state.tempObj.lng),
+                    long: (this.state.tempObj.long) ? (this.state.tempObj.long) : (this.state.tempObj.start_long),
                     isDeleted: false
                 };
 
@@ -337,9 +385,9 @@ export default class extends React.Component {
                     name: '',
                     description: '',
                     direction: '',
-                    images: '',
+                    images: [],
                     lat: (this.state.tempObj.lat) ? (this.state.tempObj.lat) : (this.state.tempObj.start_lat),
-                    long: (this.state.tempObj.long) ? (this.state.tempObj.long) : (this.state.tempObj.start_long) ? (this.state.tempObj.start_long) : (this.state.tempObj.lng),
+                    long: (this.state.tempObj.long) ? (this.state.tempObj.long) : (this.state.tempObj.start_long),
                     isDeleted: false
                 };
 
@@ -355,9 +403,9 @@ export default class extends React.Component {
                     name: '',
                     description: '',
                     direction: '',
-                    images: '',
+                    images: [],
                     lat: (this.state.tempObj.lat) ? (this.state.tempObj.lat) : (this.state.tempObj.start_lat),
-                    long: (this.state.tempObj.long) ? (this.state.tempObj.long) : (this.state.tempObj.start_long) ? (this.state.tempObj.start_long) : (this.state.tempObj.lng),
+                    long: (this.state.tempObj.long) ? (this.state.tempObj.long) : (this.state.tempObj.start_long),
                     isDeleted: false
                 };
 
@@ -377,9 +425,9 @@ export default class extends React.Component {
                     name: '',
                     description: '',
                     direction: '',
-                    images: '',
+                    images: [],
                     lat: (this.state.tempObj.lat) ? (this.state.tempObj.lat) : (this.state.tempObj.start_lat),
-                    long: (this.state.tempObj.long) ? (this.state.tempObj.long) : (this.state.tempObj.start_long) ? (this.state.tempObj.start_long) : (this.state.tempObj.lng),
+                    long: (this.state.tempObj.long) ? (this.state.tempObj.long) : (this.state.tempObj.start_long),
                     isDeleted: false
                 };
 
@@ -395,9 +443,9 @@ export default class extends React.Component {
                     name: '',
                     description: '',
                     direction: '',
-                    images: '',
+                    images: [],
                     lat: (this.state.tempObj.lat) ? (this.state.tempObj.lat) : (this.state.tempObj.start_lat),
-                    long: (this.state.tempObj.long) ? (this.state.tempObj.long) : (this.state.tempObj.start_long) ? (this.state.tempObj.start_long) : (this.state.tempObj.lng),
+                    long: (this.state.tempObj.long) ? (this.state.tempObj.long) : (this.state.tempObj.start_long),
                     isDeleted: false
                 };
 
@@ -414,9 +462,9 @@ export default class extends React.Component {
                     name: '',
                     description: '',
                     direction: '',
-                    images: '',
+                    images: [],
                     lat: (this.state.tempObj.lat) ? (this.state.tempObj.lat) : (this.state.tempObj.start_lat),
-                    long: (this.state.tempObj.long) ? (this.state.tempObj.long) : (this.state.tempObj.start_long) ? (this.state.tempObj.start_long) : (this.state.tempObj.lng),
+                    long: (this.state.tempObj.long) ? (this.state.tempObj.long) : (this.state.tempObj.start_long),
                     isDeleted: false
                 };
 
@@ -437,11 +485,11 @@ export default class extends React.Component {
                     old_name: '',
                     description: '',
                     direction: '',
-                    images: '',
+                    images: [],
                     start_lat: (this.state.tempObj.lat) ? (this.state.tempObj.lat) : (this.state.tempObj.start_lat),
-                    start_long: (this.state.tempObj.long) ? (this.state.tempObj.long) : (this.state.tempObj.start_long) ? (this.state.tempObj.start_long) : (this.state.tempObj.lng),
-                    end_lat: '0',
-                    end_long: '0',
+                    start_long: (this.state.tempObj.long) ? (this.state.tempObj.long) : (this.state.tempObj.start_long),
+                    end_lat: (this.state.tempObj.lat) ? (this.state.tempObj.lat) : (this.state.tempObj.start_lat),
+                    end_long: (this.state.tempObj.long) ? (this.state.tempObj.long) : (this.state.tempObj.start_long),
                     isDeleted: false
                 };
 
@@ -458,11 +506,11 @@ export default class extends React.Component {
                     old_name: '',
                     description: '',
                     direction: '',
-                    images: '',
+                    images: [],
                     start_lat: (this.state.tempObj.lat) ? (this.state.tempObj.lat) : (this.state.tempObj.start_lat),
-                    start_long: (this.state.tempObj.long) ? (this.state.tempObj.long) : (this.state.tempObj.start_long) ? (this.state.tempObj.start_long) : (this.state.tempObj.lng),
-                    end_lat: '0',
-                    end_long: '0',
+                    start_long: (this.state.tempObj.long) ? (this.state.tempObj.long) : (this.state.tempObj.start_long),
+                    end_lat: (this.state.tempObj.lat) ? (this.state.tempObj.lat) : (this.state.tempObj.start_lat),
+                    end_long: (this.state.tempObj.long) ? (this.state.tempObj.long) : (this.state.tempObj.start_long),
                     isDeleted: false
                 };
 
@@ -480,11 +528,11 @@ export default class extends React.Component {
                     old_name: '',
                     description: '',
                     direction: '',
-                    images: '',
+                    images: [],
                     start_lat: (this.state.tempObj.lat) ? (this.state.tempObj.lat) : (this.state.tempObj.start_lat),
-                    start_long: (this.state.tempObj.long) ? (this.state.tempObj.long) : (this.state.tempObj.start_long) ? (this.state.tempObj.start_long) : (this.state.tempObj.lng),
-                    end_lat: '0',
-                    end_long: '0',
+                    start_long: (this.state.tempObj.long) ? (this.state.tempObj.long) : (this.state.tempObj.start_long),
+                    end_lat: (this.state.tempObj.lat) ? (this.state.tempObj.lat) : (this.state.tempObj.start_lat),
+                    end_long: (this.state.tempObj.long) ? (this.state.tempObj.long) : (this.state.tempObj.start_long),
                     isDeleted: false
                 };
 
@@ -509,19 +557,81 @@ export default class extends React.Component {
     };
 
     addMarker = (e) => {
-        const { markers, points } = this.state
-        markers.push(e.latlng)
-        points.push({
-            idx: "MarkerN" + points.length,
-            lat: e.latlng.lat,
-            long: e.latlng.lng,
-            type: 'empty',
-            isDeleted: false
-        })
-        console.log(e.latlng);
+        if (!this.state.isSelectStreetTo && !this.state.isSelectStreetFrom && !this.state.isSelectPoint) {
+            const { markers, points } = this.state
+            markers.push(e.latlng)
+            points.push({
+                idx: "MarkerN" + points.length,
+                lat: e.latlng.lat,
+                long: e.latlng.lng,
+                type: 'empty',
+                isDeleted: false
+            })
+
+            this.setState({
+                markers: markers,
+                points: points
+            })
+
+            this.updateStreet(true);
+        }
+
+        if (this.state.isSelectStreetTo) {
+            const { tempObj, points } = this.state
+
+            tempObj.end_lat = e.latlng.lat;
+            tempObj.end_long = e.latlng.lng;
+
+            let index = points.findIndex((point) => point.idx == tempObj.idx);
+            points[index] = tempObj;
+
+            this.setState({
+                isSelectStreetTo: false,
+                tempObj: tempObj,
+                points: points
+            })
+
+            this.updateStreet(true);
+        }
+
+        if (this.state.isSelectStreetFrom) {
+            const { tempObj, points } = this.state
+
+            tempObj.start_lat = e.latlng.lat;
+            tempObj.start_long = e.latlng.lng;
+
+            let index = points.findIndex((point) => point.idx == tempObj.idx);
+            points[index] = tempObj;
+
+            this.setState({
+                isSelectStreetTo: false,
+                tempObj: tempObj,
+                points: points
+            })
+
+            this.updateStreet(true);
+        }
+
+        if (this.state.isSelectPoint) {
+            const { tempObj, points } = this.state
+
+            tempObj.lat = e.latlng.lat;
+            tempObj.long = e.latlng.lng;
+
+            let index = points.findIndex((point) => point.idx == tempObj.idx);
+            points[index] = tempObj;
+
+            this.setState({
+                isSelectPoint: false,
+                tempObj: tempObj,
+                points: points
+            })
+        }
+    }
+
+    updateStreet = (status) => {
         this.setState({
-            markers: markers,
-            points: points
+            isUpdatedStreet: status
         })
     }
 
@@ -531,10 +641,6 @@ export default class extends React.Component {
         let iconMapUrl = null;
 
         let iconMapYou = null;
-
-        let focusObject = null;
-
-        let zoom = null;
 
         if (person.getThemeTone() === 'light') {
             iconMapYou = ImgMapYouDark;
@@ -598,48 +704,85 @@ export default class extends React.Component {
                 </Marker> : null}
 
                 {this.state.markers.map((position, idx) =>
-                    (position.lat) ? <div>
-                        <Marker id={'MarkerN' + idx} position={position} icon={iconPin}
-                            onpopupopen={async () => (document.getElementById("blockFullInfo")) ? await this.openInfo('MarkerN' + idx + "|" + position.lat + "|" + position.lng) : null}
-                            onpopupclose={async () => (document.getElementById("blockFullInfo")) ? await this.closeInfo() : null}
-                        >
-                            <Popup fill="#000000">
-                                <b>Точка на карте</b>
-                            </Popup>:
+                    (this.state.points.find((point) => point.idx == 'MarkerN' + idx).isDeleted) ? <div></div> :
+                        (this.state.points.find((point) => point.idx == 'MarkerN' + idx).lat && this.state.tempObj != null && 'MarkerN' + idx === this.state.tempObj.idx) ?
+                            <div>
+                                <Marker id={this.state.tempObj.idx} position={new Array(this.state.tempObj.lat, this.state.tempObj.long)} icon={iconPin}
+                                    onpopupopen={async () => (document.getElementById("blockFullInfo")) ? await this.openInfo('MarkerN' + idx + "|" + this.state.tempObj.lat + "|" + this.state.tempObj.long) : null}
+                                    onpopupclose={async () => (document.getElementById("blockFullInfo")) ? await this.closeInfo() : null}
+                                >
+                                    <Popup fill="#000000">
+                                        <b>Точка на карте</b>
+                                    </Popup>
+                                </Marker>
+                            </div> :
+                            (this.state.points.find((point) => point.idx == 'MarkerN' + idx).lat) ? <div>
+                                <Marker id={'MarkerN' + idx} position={new Array(this.state.points.find((point) => point.idx == 'MarkerN' + idx).lat, this.state.points.find((point) => point.idx == 'MarkerN' + idx).long)} icon={iconPin}
+                                    onpopupopen={async () => (document.getElementById("blockFullInfo")) ? await this.openInfo('MarkerN' + idx + "|" + this.state.points.find((point) => point.idx == 'MarkerN' + idx).lat + "|" + this.state.points.find((point) => point.idx == 'MarkerN' + idx).long) : null}
+                                    onpopupclose={async () => (document.getElementById("blockFullInfo")) ? await this.closeInfo() : null}
+                                >
+                                    <Popup fill="#000000">
+                                        <b>Точка на карте</b>
+                                    </Popup>
+                                </Marker>
+                            </div> :
+                                (this.state.tempObj !== null && this.state.tempObj.idx === 'MarkerN' + idx) ? <div>
+                                    <Marker
+                                        icon={iconPin}
+                                        position={new Array(this.state.tempObj.start_lat, this.state.tempObj.start_long)}
+                                        onpopupopen={async () => (document.getElementById("blockFullInfo")) ? await this.openInfo('MarkerN' + idx + "|" + this.state.tempObj.start_lat + "|" + this.state.tempObj.end_long + "|" + this.state.tempObj.end_lat + "|" + this.state.tempObj.end_long) : null}
+                                        onpopupclose={async () => (document.getElementById("blockFullInfo")) ? await this.closeInfo() : null}
+                                    >
+                                        <Popup fill="#000000">
+                                            <b>Улица</b><br />
+                                            <b>Начало</b>
+                                        </Popup>
+                                    </Marker>
 
-                        </Marker>
-                    </div> :
-                        <div>
-                            <Marker
-                                icon={iconPin}
-                                position={new Array(position.start_lat, position.start_long)}
-                                onpopupopen={async () => (document.getElementById("blockFullInfo")) ? await this.openInfo('MarkerN' + idx + "|" + position.start_lat + "|" + position.start_lng + "|" + position.end_lat + "|" + position.end_lng) : null}
-                                onpopupclose={async () => (document.getElementById("blockFullInfo")) ? await this.closeInfo() : null}
-                            >
+                                    <Marker
+                                        icon={iconPin}
+                                        position={new Array(this.state.tempObj.end_lat, this.state.tempObj.end_long)}
+                                        onpopupopen={async () => (document.getElementById("blockFullInfo")) ? await this.openInfo('MarkerN' + idx + "|" + this.state.tempObj.end_lat + "|" + this.state.tempObj.end_long) : null}
+                                        onpopupclose={async () => (document.getElementById("blockFullInfo")) ? await this.closeInfo() : null}
+                                    >
+                                        <Popup fill="#000000">
+                                            <b>Улица</b><br />
+                                            <b>Конец</b>
+                                        </Popup>
+                                    </Marker>
 
-                                <Popup fill="#000000">
-                                    <b>Улица</b><br />
-                                    <b>Начало</b>
-                                </Popup>
+                                    {this.state.isMapInit && this.state.isUpdatedStreet && this.updateStreet(false)}
 
-                            </Marker>
+                                    {this.state.isMapInit && !this.state.isUpdatedStreet && <Routing map={this.map} person={person} lineColor={'#fb9300'} startPoint={{ lat: this.state.tempObj.start_lat, long: this.state.tempObj.start_long }} endPoint={{ lat: this.state.tempObj.end_lat, long: this.state.tempObj.end_long }} />}
+                                </div> :
+                                    <div>
+                                        <Marker
+                                            icon={iconPin}
+                                            position={new Array(this.state.points.find((point) => point.idx == 'MarkerN' + idx).start_lat, this.state.points.find((point) => point.idx == 'MarkerN' + idx).start_long)}
+                                            onpopupopen={async () => (document.getElementById("blockFullInfo")) ? await this.openInfo('MarkerN' + idx + "|" + this.state.points.find((point) => point.idx == 'MarkerN' + idx).start_lat + "|" + this.state.points.find((point) => point.idx == 'MarkerN' + idx).start_long + "|" + this.state.points.find((point) => point.idx == 'MarkerN' + idx).end_lat + "|" + this.state.points.find((point) => point.idx == 'MarkerN' + idx).end_long) : null}
+                                            onpopupclose={async () => (document.getElementById("blockFullInfo")) ? await this.closeInfo() : null}>
+                                            <Popup fill="#000000">
+                                                <b>Улица</b><br />
+                                                <b>Начало</b>
+                                            </Popup>
 
-                            <Marker
-                                icon={iconPin}
-                                position={new Array(position.end_lat, position.end_long)}
-                                onpopupopen={async () => (document.getElementById("blockFullInfo")) ? await this.openInfo('MarkerN' + idx + "|" + position.end_lat + "|" + position.end_lng) : null}
-                                onpopupclose={async () => (document.getElementById("blockFullInfo")) ? await this.closeInfo() : null}
-                            >
+                                        </Marker>
 
-                                <Popup fill="#000000">
-                                    <b>Улица</b><br />
-                                    <b>Конец</b>
-                                </Popup>
+                                        <Marker
+                                            icon={iconPin}
+                                            position={new Array(this.state.points.find((point) => point.idx == 'MarkerN' + idx).end_lat, this.state.points.find((point) => point.idx == 'MarkerN' + idx).end_long)}
+                                            onpopupopen={async () => (document.getElementById("blockFullInfo")) ? await this.openInfo('MarkerN' + idx + "|" + this.state.points.find((point) => point.idx == 'MarkerN' + idx).end_lat + "|" + this.state.points.find((point) => point.idx == 'MarkerN' + idx).end_long) : null}
+                                            onpopupclose={async () => (document.getElementById("blockFullInfo")) ? await this.closeInfo() : null}>
+                                            <Popup fill="#000000">
+                                                <b>Улица</b><br />
+                                                <b>Конец</b>
+                                            </Popup>
+                                        </Marker>
 
-                            </Marker>
+                                        {this.state.isMapInit && !this.state.isUpdatedStreet && <Routing map={this.map} person={person} lineColor={person.getThemeColors().svg.fill} startPoint={{ lat: this.state.points.find((point) => point.idx == 'MarkerN' + idx).start_lat, long: this.state.points.find((point) => point.idx == 'MarkerN' + idx).start_long }} endPoint={{ lat: this.state.points.find((point) => point.idx == 'MarkerN' + idx).end_lat, long: this.state.points.find((point) => point.idx == 'MarkerN' + idx).end_long }} />}
 
-                            {this.state.isMapInit && <Routing map={this.map} person={person} lineColor={person.getThemeColors().svg.fill} startPoint={{ lat: position.start_lat, long: position.start_long }} endPoint={{ lat: position.end_lat, long: position.end_long }} />}
-                        </div>
+                                        {this.state.isMapInit && this.state.isUpdatedStreet && this.updateStreet(false)}
+                                    </div>
                 )}
 
                 <datalist id="inpSearchHelp">
@@ -673,8 +816,8 @@ export default class extends React.Component {
                                     <ImgMop id="imgMopClear" fill={person.getThemeColors().svg.fill} />
                                 </div>
 
-                                <div id="boxMagnifySearch" style={{ backgroundColor: person.getThemeColors().headerColorPrimary.backgroundColor, borderColor: person.getThemeColors().svg.fill }} onClick={this.handleSearchObject}>
-                                    <ImgExchange id="imgMagnifySearch" fill={person.getThemeColors().svg.fill} />
+                                <div id="boxExchange" style={{ backgroundColor: person.getThemeColors().headerColorPrimary.backgroundColor, borderColor: person.getThemeColors().svg.fill }} onClick={this.handleSearchObject}>
+                                    <ImgExchange id="imgExchange" fill={person.getThemeColors().svg.fill} />
                                 </div>
                             </div>
                         </div>
@@ -703,7 +846,7 @@ export default class extends React.Component {
                                 document.getElementById('fullGlobalActionLine').style.display = 'none';
                             }}>Действия с объектом</p>
 
-                            <hr style={{ backgroundColor: person.getThemeColors().backgoundColorFirst.backgroundColor, borderColor: person.getThemeColors().backgoundColorFirst.backgroundColor, display: 'none' }} id="fullObjectActionLine" />
+                            <hr style={{ backgroundColor: person.getThemeColors().text.color, borderColor: person.getThemeColors().svg.fill, display: 'none' }} id="fullObjectActionLine" />
 
                             <div id="boxObjectActions" style={{ display: 'none' }}>
 
@@ -738,7 +881,7 @@ export default class extends React.Component {
                                     document.getElementById('fullGlobalActionLine').style.display = 'none';
                             }}>Глобальные действия</p>
 
-                            <hr style={{ backgroundColor: person.getThemeColors().backgoundColorFirst.backgroundColor, borderColor: person.getThemeColors().backgoundColorFirst.backgroundColor, display: 'none' }} id="fullGlobalActionLine" />
+                            <hr style={{ backgroundColor: person.getThemeColors().text.color, borderColor: person.getThemeColors().svg.fill, display: 'none' }} id="fullGlobalActionLine" />
 
                             <div id="boxGlobalActions" style={{ display: 'none' }}>
                                 <div id="boxDownload" style={{ backgroundColor: person.getThemeColors().headerColorPrimary.backgroundColor, borderColor: person.getThemeColors().svg.fill }} onClick={this.downloadTxtFile}>
