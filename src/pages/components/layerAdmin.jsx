@@ -250,8 +250,8 @@ export default class extends React.Component {
         }
 
         if (this.state.tempObj.type == 'street') {
-            this.state.tempObj.old_name = document.getElementById('infoStreetNewName').value;
-            this.state.tempObj.new_name = document.getElementById('infoStreetOldName').value;
+            this.state.tempObj.old_name = document.getElementById('infoStreetOldName').value;
+            this.state.tempObj.new_name = document.getElementById('infoStreetNewName').value;
             this.state.tempObj.description = document.getElementById('infoStreetDescription').value;
             this.state.tempObj.direction = document.getElementById('infoStreetDirection').value;
             const inputInfoStreetPictures = document.getElementById('inputInfoStreetPictures');
