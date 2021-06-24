@@ -28,11 +28,11 @@ import Person from '../../utils/person.jsx';
 export default class extends React.Component {
     constructor({ markers, points }) {
         super();
-
         this.state = {
             isMapInit: false,
             isYourLocation: false,
             isSelectStreetTo: false,
+            isSelectStreetFrom: false,
             isSelectPoint: false,
             isUpdatedStreet: false,
             markers: markers,
@@ -48,18 +48,24 @@ export default class extends React.Component {
     closeInfo() {
         document.getElementById('blockFullInfo').style.display = 'none';
         document.getElementById('box').style.display = 'none';
-
         ReactDOM.render(<this.ElementNull />, document.getElementById('objInfo'));
     }
 
     async openInfo(idx) {
         this.updateStreet(true);
+        let person = new Person();
 
         if (idx.split('|').length == 1)
             this.setState({ tempObj: this.state.points.find((point) => point.idx == idx) });
 
         if (idx.split('|').length > 1)
             this.setState({ tempObj: this.state.points.find((point) => point.idx == idx.split('|')[0]) });
+
+        if (document.getElementById('blockFullInfo'))
+            document.getElementById('blockFullInfo').style.display = 'block';
+
+        if (document.getElementById('box'))
+            document.getElementById('box').style.display = 'block';
 
         if (this.state.tempObj.type == 'empty') {
             if (document.getElementById('infoMonumentLatLong'))
@@ -73,6 +79,10 @@ export default class extends React.Component {
 
             if (document.getElementById('infoStreetTo'))
                 document.getElementById('infoStreetTo').style.display = 'none';
+
+            ReactDOM.render(<div>
+                <textarea class="text" style={{ color: person.getThemeColors().text.color, backgroundColor: person.getThemeColors().headerColorPrimary.backgroundColor }} title="Позиция точки" disabled={false} editable={true} placeholder="Позиция точки" value={'[' + this.state.tempObj.lat + ', ' + this.state.tempObj.long + ']'}></textarea>
+            </div>, document.getElementById('objInfo'));
         }
 
         if (this.state.tempObj.type == 'monument') {
@@ -84,6 +94,33 @@ export default class extends React.Component {
 
             if (document.getElementById('infoStreetTo'))
                 document.getElementById('infoStreetTo').style.display = 'none';
+
+            ReactDOM.render(<div>
+                {(this.state.tempObj.isDeleted) ? <p className="text" style={person.getThemeColors().text} onClick={() => {
+                }}><b style={{ color: 'red' }}>Удаленный</b> Монумент</p> : <p className="text" style={person.getThemeColors().text} onClick={() => {
+                }}>Монумент</p>}
+
+                <textarea id="infoMonumentName" class="text" style={{ color: person.getThemeColors().text.color, backgroundColor: person.getThemeColors().headerColorPrimary.backgroundColor }} title="Название" disabled={false} editable={true} placeholder="Название">{this.state.tempObj.name}</textarea>
+
+                <textarea id="infoMonumentDescription" class="text" style={{ color: person.getThemeColors().text.color, backgroundColor: person.getThemeColors().headerColorPrimary.backgroundColor }} title="Описание" disabled={false} editable={true} placeholder="Описание">{this.state.tempObj.description}</textarea>
+
+                <textarea id="infoMonumentDirection" class="text" style={{ color: person.getThemeColors().text.color, backgroundColor: person.getThemeColors().headerColorPrimary.backgroundColor }} title="Направление" disabled={false} editable={true} placeholder="Направление">{this.state.tempObj.direction}</textarea>
+
+                <input id="inputInfoMonumentPictures" style={{ display: 'none' }} type="file" multiple accept="image/png, image/jpeg" />
+
+                <button style={{ borderColor: person.getThemeColors().text.color, backgroundColor: person.getThemeColors().headerColorPrimary.backgroundColor, color: person.getThemeColors().text.color }} id="btnInfoMonumentPictures" onClick={() => {
+                    var input = document.getElementById('inputInfoMonumentPictures');
+                    input.click();
+                }}>Выбор изображений</button>
+
+                <textarea id="infoMonumentLatLong" class="text" style={{ display: 'none', color: person.getThemeColors().text.color, backgroundColor: person.getThemeColors().headerColorPrimary.backgroundColor }} title="Позиция" disabled={false} editable={false} placeholder="Позиция" value={'[' + this.state.tempObj.lat + ', ' + this.state.tempObj.long + ']'}></textarea>
+
+                <button style={{ borderColor: person.getThemeColors().text.color, backgroundColor: person.getThemeColors().headerColorPrimary.backgroundColor, color: person.getThemeColors().text.color }} id="btnInfoMonumentLatLong" onClick={() => {
+                    this.state.isSelectPoint = true;
+                    this.state.isSelectStreetFrom = false;
+                    this.state.isSelectStreetTo = false;
+                }}>Отметить позицию</button>
+            </div>, document.getElementById('objInfo'));
         }
 
         if (this.state.tempObj.type == 'table') {
@@ -95,6 +132,33 @@ export default class extends React.Component {
 
             if (document.getElementById('infoStreetTo'))
                 document.getElementById('infoStreetTo').style.display = 'none';
+
+            ReactDOM.render(<div>
+                {(this.state.tempObj.isDeleted) ? <p className="text" style={person.getThemeColors().text} onClick={() => {
+                }}><b style={{ color: 'red' }}>Удаленная</b> Табличка</p> : <p className="text" style={person.getThemeColors().text} onClick={() => {
+                }}>Табличка</p>}
+
+                <textarea id="infoTableName" class="text" style={{ color: person.getThemeColors().text.color, backgroundColor: person.getThemeColors().headerColorPrimary.backgroundColor }} title="Название" disabled={false} editable={true} placeholder="Название">{this.state.tempObj.name}</textarea>
+
+                <textarea id="infoTableDescription" class="text" style={{ color: person.getThemeColors().text.color, backgroundColor: person.getThemeColors().headerColorPrimary.backgroundColor }} title="Описание" disabled={false} editable={true} placeholder="Описание">{this.state.tempObj.description}</textarea>
+
+                <textarea id="infoTableDirection" class="text" style={{ color: person.getThemeColors().text.color, backgroundColor: person.getThemeColors().headerColorPrimary.backgroundColor }} title="Направление" disabled={false} editable={true} placeholder="Направление">{this.state.tempObj.direction}</textarea>
+
+                <input id="inputInfoTablePictures" style={{ display: 'none' }} type="file" multiple accept="image/png, image/jpeg" />
+
+                <button style={{ borderColor: person.getThemeColors().text.color, backgroundColor: person.getThemeColors().headerColorPrimary.backgroundColor, color: person.getThemeColors().text.color }} id="btnInfoTablePictures" onClick={() => {
+                    var input = document.getElementById('inputInfoTablePictures');
+                    input.click();
+                }}>Выбор изображений</button>
+
+                <textarea id="infoTableLatLong" class="text" style={{ display: 'none', color: person.getThemeColors().text.color, backgroundColor: person.getThemeColors().headerColorPrimary.backgroundColor }} title="Позиция" disabled={false} editable={false} placeholder="Позиция" value={'[' + this.state.tempObj.lat + ', ' + this.state.tempObj.long + ']'}></textarea>
+
+                <button style={{ borderColor: person.getThemeColors().text.color, backgroundColor: person.getThemeColors().headerColorPrimary.backgroundColor, color: person.getThemeColors().text.color }} id="btnInfoTableLatLong" onClick={() => {
+                    this.state.isSelectPoint = true;
+                    this.state.isSelectStreetFrom = false;
+                    this.state.isSelectStreetTo = false;
+                }}>Отметить позицию</button>
+            </div>, document.getElementById('objInfo'));
         }
 
         if (this.state.tempObj.type == 'street') {
@@ -103,17 +167,44 @@ export default class extends React.Component {
 
             if (document.getElementById('infoTableLatLong'))
                 document.getElementById('infoTableLatLong').style.display = 'none';
+
+            ReactDOM.render(<div>
+                {(this.state.tempObj.isDeleted) ? <p className="text" style={person.getThemeColors().text} onClick={() => {
+                }}><b style={{ color: 'red' }}>Удаленный</b> Улица</p> : <p className="text" style={person.getThemeColors().text} onClick={() => {
+                }}>Улица</p>}
+
+                <textarea id="infoStreetNewName" class="text" style={{ color: person.getThemeColors().text.color, backgroundColor: person.getThemeColors().headerColorPrimary.backgroundColor }} title="Новое название" disabled={false} editable={true} placeholder="Новое название">{this.state.tempObj.new_name}</textarea>
+
+                <textarea id="infoStreetOldName" class="text" style={{ color: person.getThemeColors().text.color, backgroundColor: person.getThemeColors().headerColorPrimary.backgroundColor }} title="Старое название" disabled={false} editable={true} placeholder="Старое название">{this.state.tempObj.old_name}</textarea>
+
+                <textarea id="infoStreetDescription" class="text" style={{ color: person.getThemeColors().text.color, backgroundColor: person.getThemeColors().headerColorPrimary.backgroundColor }} title="Описание" disabled={false} editable={true} placeholder="Описание">{this.state.tempObj.description}</textarea>
+
+                <textarea id="infoStreetDirection" class="text" style={{ color: person.getThemeColors().text.color, backgroundColor: person.getThemeColors().headerColorPrimary.backgroundColor }} title="Направление" disabled={false} editable={true} placeholder="Направление">{this.state.tempObj.direction}</textarea>
+
+                <input id="inputInfoStreetPictures" style={{ display: 'none' }} type="file" multiple accept="image/png, image/jpeg" />
+
+                <button style={{ borderColor: person.getThemeColors().text.color, backgroundColor: person.getThemeColors().headerColorPrimary.backgroundColor, color: person.getThemeColors().text.color }} id="btnInfoStreetPictures" onClick={() => {
+                    var input = document.getElementById('inputInfoStreetPictures');
+                    input.click();
+                }}>Выбор изображений</button>
+
+                <textarea id="infoStreetFrom" class="text" style={{ display: 'none', color: person.getThemeColors().text.color, backgroundColor: person.getThemeColors().headerColorPrimary.backgroundColor }} title="Позиция начала" disabled={false} editable={false} placeholder="Позиция начала" value={'[' + this.state.tempObj.start_lat + ', ' + this.state.tempObj.start_long + ']'}></textarea>
+
+                <textarea id="infoStreetTo" class="text" style={{ display: 'none', color: person.getThemeColors().text.color, backgroundColor: person.getThemeColors().headerColorPrimary.backgroundColor }} title="Позиция конца" disabled={false} editable={false} placeholder="Позиция конца">{'[' + this.state.tempObj.end_lat + ', ' + this.state.tempObj.end_long + ']'}</textarea>
+
+                <button style={{ borderColor: person.getThemeColors().text.color, backgroundColor: person.getThemeColors().headerColorPrimary.backgroundColor, color: person.getThemeColors().text.color }} id="btnInfoStreetFrom" onClick={() => {
+                    this.state.isSelectPoint = false;
+                    this.state.isSelectStreetFrom = true;
+                    this.state.isSelectStreetTo = false;
+                }}>Отметить начало</button>
+
+                <button style={{ borderColor: person.getThemeColors().text.color, backgroundColor: person.getThemeColors().headerColorPrimary.backgroundColor, color: person.getThemeColors().text.color }} id="btnInfoStreetTo" onClick={() => {
+                    this.state.isSelectPoint = false;
+                    this.state.isSelectStreetFrom = false;
+                    this.state.isSelectStreetTo = true;
+                }}>Отметить конец</button>
+            </div>, document.getElementById('objInfo'));
         }
-
-        if (document.getElementById('blockFullInfo'))
-            document.getElementById('blockFullInfo').style.display = 'block';
-
-        if (document.getElementById('box'))
-            document.getElementById('box').style.display = 'block';
-
-        let person = new Person();
-
-        ReactDOM.render(<this.ObjectInfo state={this.state} person={person} object={this.state.tempObj} type={this.state.tempObj.type} />, document.getElementById('objInfo'));
     }
 
     downloadTxtFile = () => {
@@ -136,14 +227,11 @@ export default class extends React.Component {
             this.state.tempObj.name = document.getElementById('infoMonumentName').value;
             this.state.tempObj.description = document.getElementById('infoMonumentDescription').value;
             this.state.tempObj.direction = document.getElementById('infoMonumentDirection').value;
-
             const inputInfoMonumentPictures = document.getElementById('inputInfoMonumentPictures');
-            for (let index = 0; index < inputInfoMonumentPictures.files.length; index++) {
-                this.state.tempObj.images.push(inputInfoMonumentPictures.files[index])
-            }
+            for (let index = 0; index < inputInfoMonumentPictures.files.length; index++)
+                this.state.tempObj.images.push(inputInfoMonumentPictures.files[index]);
 
             index = this.state.points.findIndex((point) => point.idx == this.state.tempObj.idx);
-
             if (index > -1)
                 this.state.points[index] = this.state.tempObj;
         }
@@ -152,14 +240,11 @@ export default class extends React.Component {
             this.state.tempObj.name = document.getElementById('infoTableName').value;
             this.state.tempObj.description = document.getElementById('infoTableDescription').value;
             this.state.tempObj.direction = document.getElementById('infoTableDirection').value;
-
             const inputInfoTablePictures = document.getElementById('inputInfoTablePictures');
-            for (let index = 0; index < inputInfoTablePictures.files.length; index++) {
-                this.state.tempObj.images.push(inputInfoTablePictures.files[index])
-            }
+            for (let index = 0; index < inputInfoTablePictures.files.length; index++)
+                this.state.tempObj.images.push(inputInfoTablePictures.files[index]);
 
             index = this.state.points.findIndex((point) => point.idx == this.state.tempObj.idx);
-
             if (index > -1)
                 this.state.points[index] = this.state.tempObj;
         }
@@ -169,14 +254,11 @@ export default class extends React.Component {
             this.state.tempObj.new_name = document.getElementById('infoStreetOldName').value;
             this.state.tempObj.description = document.getElementById('infoStreetDescription').value;
             this.state.tempObj.direction = document.getElementById('infoStreetDirection').value;
-
             const inputInfoStreetPictures = document.getElementById('inputInfoStreetPictures');
-            for (let index = 0; index < inputInfoStreetPictures.files.length; index++) {
-                this.state.tempObj.images.push(inputInfoStreetPictures.files[index])
-            }
+            for (let index = 0; index < inputInfoStreetPictures.files.length; index++)
+                this.state.tempObj.images.push(inputInfoStreetPictures.files[index]);
 
             index = this.state.points.findIndex((point) => point.idx == this.state.tempObj.idx);
-
             if (index > -1)
                 this.state.points[index] = this.state.tempObj;
         }
@@ -185,121 +267,9 @@ export default class extends React.Component {
     handleDeletePoint = async () => {
         let index = this.state.points.findIndex((pont) => pont.idx == this.state.tempObj.idx);
         this.state.points[index].isDeleted = true;
-
-        index = this.state.points.findIndex((point) => point.idx == this.state.tempObj.idx);
         this.state.tempObj = this.state.points[index];
-
         await this.openInfo(this.state.tempObj.idx);
-    }
-
-    ObjectInfo({ state, person, object, type }) {
-        if (type == 'monument')
-            return (
-                <div>
-                    {(object.isDeleted) ? <p className="text" style={person.getThemeColors().text} onClick={() => {
-                    }}><b style={{ color: 'red' }}>Удаленный</b> Монумент</p> : <p className="text" style={person.getThemeColors().text} onClick={() => {
-                    }}>Монумент</p>}
-
-                    <textarea id="infoMonumentName" class="text" style={{ color: person.getThemeColors().text.color, backgroundColor: person.getThemeColors().headerColorPrimary.backgroundColor }} title="Название" disabled={false} editable={true} placeholder="Название">{object.name}</textarea>
-
-                    <textarea id="infoMonumentDescription" class="text" style={{ color: person.getThemeColors().text.color, backgroundColor: person.getThemeColors().headerColorPrimary.backgroundColor }} title="Описание" disabled={false} editable={true} placeholder="Описание">{object.description}</textarea>
-
-                    <textarea id="infoMonumentDirection" class="text" style={{ color: person.getThemeColors().text.color, backgroundColor: person.getThemeColors().headerColorPrimary.backgroundColor }} title="Направление" disabled={false} editable={true} placeholder="Направление">{object.direction}</textarea>
-
-                    <input id="inputInfoMonumentPictures" style={{ display: 'none' }} type="file" multiple accept="image/png, image/jpeg" />
-
-                    <button style={{ borderColor: person.getThemeColors().text.color, backgroundColor: person.getThemeColors().headerColorPrimary.backgroundColor, color: person.getThemeColors().text.color }} id="btnInfoMonumentPictures" onClick={() => {
-                        var input = document.getElementById('inputInfoMonumentPictures');
-                        input.click();
-                    }}>Выбор изображений</button>
-
-                    <textarea id="infoMonumentLatLong" class="text" style={{ display: 'none', color: person.getThemeColors().text.color, backgroundColor: person.getThemeColors().headerColorPrimary.backgroundColor }} title="Позиция" disabled={false} editable={false} placeholder="Позиция" value={'[' + object.lat + ', ' + object.long + ']'}></textarea>
-
-                    <button style={{ borderColor: person.getThemeColors().text.color, backgroundColor: person.getThemeColors().headerColorPrimary.backgroundColor, color: person.getThemeColors().text.color }} id="btnInfoMonumentLatLong" onClick={() => {
-                        state.isSelectPoint = true;
-                        state.isSelectStreetFrom = false;
-                        state.isSelectStreetTo = false;
-                    }}>Отметить позицию</button>
-                </div >
-            );
-
-        if (type == 'table')
-            return (
-                <div>
-                    {(object.isDeleted) ? <p className="text" style={person.getThemeColors().text} onClick={() => {
-                    }}><b style={{ color: 'red' }}>Удаленная</b> Табличка</p> : <p className="text" style={person.getThemeColors().text} onClick={() => {
-                    }}>Табличка</p>}
-
-                    <textarea id="infoTableName" class="text" style={{ color: person.getThemeColors().text.color, backgroundColor: person.getThemeColors().headerColorPrimary.backgroundColor }} title="Название" disabled={false} editable={true} placeholder="Название">{object.name}</textarea>
-
-                    <textarea id="infoTableDescription" class="text" style={{ color: person.getThemeColors().text.color, backgroundColor: person.getThemeColors().headerColorPrimary.backgroundColor }} title="Описание" disabled={false} editable={true} placeholder="Описание">{object.description}</textarea>
-
-                    <textarea id="infoTableDirection" class="text" style={{ color: person.getThemeColors().text.color, backgroundColor: person.getThemeColors().headerColorPrimary.backgroundColor }} title="Направление" disabled={false} editable={true} placeholder="Направление">{object.direction}</textarea>
-
-                    <input id="inputInfoTablePictures" style={{ display: 'none' }} type="file" multiple accept="image/png, image/jpeg" />
-
-                    <button style={{ borderColor: person.getThemeColors().text.color, backgroundColor: person.getThemeColors().headerColorPrimary.backgroundColor, color: person.getThemeColors().text.color }} id="btnInfoTablePictures" onClick={() => {
-                        var input = document.getElementById('inputInfoTablePictures');
-                        input.click();
-                    }}>Выбор изображений</button>
-
-                    <textarea id="infoTableLatLong" class="text" style={{ display: 'none', color: person.getThemeColors().text.color, backgroundColor: person.getThemeColors().headerColorPrimary.backgroundColor }} title="Позиция" disabled={false} editable={false} placeholder="Позиция" value={'[' + object.lat + ', ' + object.long + ']'}></textarea>
-
-                    <button style={{ borderColor: person.getThemeColors().text.color, backgroundColor: person.getThemeColors().headerColorPrimary.backgroundColor, color: person.getThemeColors().text.color }} id="btnInfoTableLatLong" onClick={() => {
-                        state.isSelectPoint = true;
-                        state.isSelectStreetFrom = false;
-                        state.isSelectStreetTo = false;
-                    }}>Отметить позицию</button>
-                </div >
-            );
-
-        if (type == 'street')
-            return (
-                <div>
-                    {(object.isDeleted) ? <p className="text" style={person.getThemeColors().text} onClick={() => {
-                    }}><b style={{ color: 'red' }}>Удаленный</b> Улица</p> : <p className="text" style={person.getThemeColors().text} onClick={() => {
-                    }}>Улица</p>}
-
-                    <textarea id="infoStreetNewName" class="text" style={{ color: person.getThemeColors().text.color, backgroundColor: person.getThemeColors().headerColorPrimary.backgroundColor }} title="Новое название" disabled={false} editable={true} placeholder="Новое название">{object.new_name}</textarea>
-
-                    <textarea id="infoStreetOldName" class="text" style={{ color: person.getThemeColors().text.color, backgroundColor: person.getThemeColors().headerColorPrimary.backgroundColor }} title="Старое название" disabled={false} editable={true} placeholder="Старое название">{object.old_name}</textarea>
-
-                    <textarea id="infoStreetDescription" class="text" style={{ color: person.getThemeColors().text.color, backgroundColor: person.getThemeColors().headerColorPrimary.backgroundColor }} title="Описание" disabled={false} editable={true} placeholder="Описание">{object.description}</textarea>
-
-                    <textarea id="infoStreetDirection" class="text" style={{ color: person.getThemeColors().text.color, backgroundColor: person.getThemeColors().headerColorPrimary.backgroundColor }} title="Направление" disabled={false} editable={true} placeholder="Направление">{object.direction}</textarea>
-
-                    <input id="inputInfoStreetPictures" style={{ display: 'none' }} type="file" multiple accept="image/png, image/jpeg" />
-
-                    <button style={{ borderColor: person.getThemeColors().text.color, backgroundColor: person.getThemeColors().headerColorPrimary.backgroundColor, color: person.getThemeColors().text.color }} id="btnInfoStreetPictures" onClick={() => {
-                        var input = document.getElementById('inputInfoStreetPictures');
-                        input.click();
-                    }}>Выбор изображений</button>
-
-                    <textarea id="infoStreetFrom" class="text" style={{ display: 'none', color: person.getThemeColors().text.color, backgroundColor: person.getThemeColors().headerColorPrimary.backgroundColor }} title="Позиция начала" disabled={false} editable={false} placeholder="Позиция начала" value={'[' + object.start_lat + ', ' + object.start_long + ']'}></textarea>
-
-                    <textarea id="infoStreetTo" class="text" style={{ display: 'none', color: person.getThemeColors().text.color, backgroundColor: person.getThemeColors().headerColorPrimary.backgroundColor }} title="Позиция конца" disabled={false} editable={false} placeholder="Позиция конца">{'[' + object.end_lat + ', ' + object.end_long + ']'}</textarea>
-
-                    <button style={{ borderColor: person.getThemeColors().text.color, backgroundColor: person.getThemeColors().headerColorPrimary.backgroundColor, color: person.getThemeColors().text.color }} id="btnInfoStreetFrom" onClick={() => {
-                        state.isSelectPoint = false;
-                        state.isSelectStreetFrom = true;
-                        state.isSelectStreetTo = false;
-                    }}>Отметить начало</button>
-
-                    <button style={{ borderColor: person.getThemeColors().text.color, backgroundColor: person.getThemeColors().headerColorPrimary.backgroundColor, color: person.getThemeColors().text.color }} id="btnInfoStreetTo" onClick={() => {
-                        state.isSelectPoint = false;
-                        state.isSelectStreetFrom = false;
-                        state.isSelectStreetTo = true;
-                    }}>Отметить конец</button>
-                </div >
-            );
-
-        if (type == 'empty')
-            return (
-                <div>
-                    <textarea class="text" style={{ color: person.getThemeColors().text.color, backgroundColor: person.getThemeColors().headerColorPrimary.backgroundColor }} title="Позиция точки" disabled={false} editable={true} placeholder="Позиция точки" value={'[' + object.lat + ', ' + object.long + ']'}></textarea>
-                </div >
-            );
-
+        await this.closeInfo();
     }
 
     BlockFullInfo({ person }) {
@@ -312,7 +282,6 @@ export default class extends React.Component {
                         document.getElementById('objInfo').style.display = 'block';
                     else
                         document.getElementById('objInfo').style.display = 'none';
-
 
                     if (document.getElementById('fullInfoLine').style.display == 'none')
                         document.getElementById('fullInfoLine').style.display = 'block';
@@ -372,7 +341,6 @@ export default class extends React.Component {
                     long: (this.state.tempObj.long) ? (this.state.tempObj.long) : (this.state.tempObj.start_long),
                     isDeleted: false
                 };
-
                 this.state.points[index] = this.state.tempObj;
             }
 
@@ -390,7 +358,6 @@ export default class extends React.Component {
                     long: (this.state.tempObj.long) ? (this.state.tempObj.long) : (this.state.tempObj.start_long),
                     isDeleted: false
                 };
-
                 this.state.points[index] = this.state.tempObj;
             }
 
@@ -408,7 +375,6 @@ export default class extends React.Component {
                     long: (this.state.tempObj.long) ? (this.state.tempObj.long) : (this.state.tempObj.start_long),
                     isDeleted: false
                 };
-
                 this.state.points[index] = this.state.tempObj;
             }
 
@@ -430,7 +396,6 @@ export default class extends React.Component {
                     long: (this.state.tempObj.long) ? (this.state.tempObj.long) : (this.state.tempObj.start_long),
                     isDeleted: false
                 };
-
                 this.state.points[index] = this.state.tempObj;
             }
 
@@ -448,7 +413,6 @@ export default class extends React.Component {
                     long: (this.state.tempObj.long) ? (this.state.tempObj.long) : (this.state.tempObj.start_long),
                     isDeleted: false
                 };
-
                 this.state.points[index] = this.state.tempObj;
             }
 
@@ -467,10 +431,8 @@ export default class extends React.Component {
                     long: (this.state.tempObj.long) ? (this.state.tempObj.long) : (this.state.tempObj.start_long),
                     isDeleted: false
                 };
-
                 this.state.points[index] = this.state.tempObj;
             }
-
             await this.openInfo(this.state.tempObj.idx);
         }
 
@@ -492,7 +454,6 @@ export default class extends React.Component {
                     end_long: (this.state.tempObj.long) ? (this.state.tempObj.long) : (this.state.tempObj.start_long),
                     isDeleted: false
                 };
-
                 this.state.points[index] = this.state.tempObj;
             }
 
@@ -513,7 +474,6 @@ export default class extends React.Component {
                     end_long: (this.state.tempObj.long) ? (this.state.tempObj.long) : (this.state.tempObj.start_long),
                     isDeleted: false
                 };
-
                 this.state.points[index] = this.state.tempObj;
             }
 
@@ -535,10 +495,8 @@ export default class extends React.Component {
                     end_long: (this.state.tempObj.long) ? (this.state.tempObj.long) : (this.state.tempObj.start_long),
                     isDeleted: false
                 };
-
                 this.state.points[index] = this.state.tempObj;
             }
-
             await this.openInfo(this.state.tempObj.idx);
         }
     }
@@ -558,6 +516,11 @@ export default class extends React.Component {
 
     addMarker = (e) => {
         if (!this.state.isSelectStreetTo && !this.state.isSelectStreetFrom && !this.state.isSelectPoint) {
+            console.log('States');
+            console.log(this.state.isSelectStreetTo);
+            console.log(this.state.isSelectStreetFrom);
+            console.log(this.state.isSelectPoint);
+            console.log('End states');
             const { markers, points } = this.state
             markers.push(e.latlng)
             points.push({
@@ -572,7 +535,6 @@ export default class extends React.Component {
                 markers: markers,
                 points: points
             })
-
             this.updateStreet(true);
         }
 
@@ -590,7 +552,6 @@ export default class extends React.Component {
                 tempObj: tempObj,
                 points: points
             })
-
             this.updateStreet(true);
         }
 
@@ -608,7 +569,6 @@ export default class extends React.Component {
                 tempObj: tempObj,
                 points: points
             })
-
             this.updateStreet(true);
         }
 
@@ -689,7 +649,7 @@ export default class extends React.Component {
         return (
             <LeafletMap
                 center={this.state.focusLocation}
-                zoom={6} minZoom={6} maxZoom={18} attributionControl={true} zoomControl={false} doubleClickZoom={false} scrollWheelZoom={true} dragging={true} animate={true} easeLinearity={0.35} ref={this.saveMap} onClick={this.addMarker}>
+                zoom={8} minZoom={6} maxZoom={18} attributionControl={true} zoomControl={false} doubleClickZoom={false} scrollWheelZoom={true} dragging={true} animate={true} easeLinearity={0.35} ref={this.saveMap} onClick={this.addMarker}>
 
                 <TileLayer attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors' url={linkMap} />
 
@@ -709,8 +669,7 @@ export default class extends React.Component {
                             <div>
                                 <Marker id={this.state.tempObj.idx} position={new Array(this.state.tempObj.lat, this.state.tempObj.long)} icon={iconPin}
                                     onpopupopen={async () => (document.getElementById("blockFullInfo")) ? await this.openInfo('MarkerN' + idx + "|" + this.state.tempObj.lat + "|" + this.state.tempObj.long) : null}
-                                    onpopupclose={async () => (document.getElementById("blockFullInfo")) ? await this.closeInfo() : null}
-                                >
+                                    onpopupclose={async () => (document.getElementById("blockFullInfo")) ? await this.closeInfo() : null}>
                                     <Popup fill="#000000">
                                         <b>Точка на карте</b>
                                     </Popup>
@@ -719,8 +678,7 @@ export default class extends React.Component {
                             (this.state.points.find((point) => point.idx == 'MarkerN' + idx).lat) ? <div>
                                 <Marker id={'MarkerN' + idx} position={new Array(this.state.points.find((point) => point.idx == 'MarkerN' + idx).lat, this.state.points.find((point) => point.idx == 'MarkerN' + idx).long)} icon={iconPin}
                                     onpopupopen={async () => (document.getElementById("blockFullInfo")) ? await this.openInfo('MarkerN' + idx + "|" + this.state.points.find((point) => point.idx == 'MarkerN' + idx).lat + "|" + this.state.points.find((point) => point.idx == 'MarkerN' + idx).long) : null}
-                                    onpopupclose={async () => (document.getElementById("blockFullInfo")) ? await this.closeInfo() : null}
-                                >
+                                    onpopupclose={async () => (document.getElementById("blockFullInfo")) ? await this.closeInfo() : null}>
                                     <Popup fill="#000000">
                                         <b>Точка на карте</b>
                                     </Popup>
@@ -731,8 +689,7 @@ export default class extends React.Component {
                                         icon={iconPin}
                                         position={new Array(this.state.tempObj.start_lat, this.state.tempObj.start_long)}
                                         onpopupopen={async () => (document.getElementById("blockFullInfo")) ? await this.openInfo('MarkerN' + idx + "|" + this.state.tempObj.start_lat + "|" + this.state.tempObj.end_long + "|" + this.state.tempObj.end_lat + "|" + this.state.tempObj.end_long) : null}
-                                        onpopupclose={async () => (document.getElementById("blockFullInfo")) ? await this.closeInfo() : null}
-                                    >
+                                        onpopupclose={async () => (document.getElementById("blockFullInfo")) ? await this.closeInfo() : null}>
                                         <Popup fill="#000000">
                                             <b>Улица</b><br />
                                             <b>Начало</b>
@@ -743,8 +700,7 @@ export default class extends React.Component {
                                         icon={iconPin}
                                         position={new Array(this.state.tempObj.end_lat, this.state.tempObj.end_long)}
                                         onpopupopen={async () => (document.getElementById("blockFullInfo")) ? await this.openInfo('MarkerN' + idx + "|" + this.state.tempObj.end_lat + "|" + this.state.tempObj.end_long) : null}
-                                        onpopupclose={async () => (document.getElementById("blockFullInfo")) ? await this.closeInfo() : null}
-                                    >
+                                        onpopupclose={async () => (document.getElementById("blockFullInfo")) ? await this.closeInfo() : null}>
                                         <Popup fill="#000000">
                                             <b>Улица</b><br />
                                             <b>Конец</b>
@@ -765,7 +721,6 @@ export default class extends React.Component {
                                                 <b>Улица</b><br />
                                                 <b>Начало</b>
                                             </Popup>
-
                                         </Marker>
 
                                         <Marker
@@ -812,6 +767,7 @@ export default class extends React.Component {
                                     onKeyDown={this.handleChangeSearchObject}
                                     className={(person.getThemeTone() === 'light') ? 'dark' : 'light'}>
                                 </input>
+
                                 <div id="boxMopClear" style={{ backgroundColor: person.getThemeColors().headerColorPrimary.backgroundColor, borderColor: person.getThemeColors().svg.fill }} onClick={this.handleClearSearch}>
                                     <ImgMop id="imgMopClear" fill={person.getThemeColors().svg.fill} />
                                 </div>
@@ -849,7 +805,6 @@ export default class extends React.Component {
                             <hr style={{ backgroundColor: person.getThemeColors().text.color, borderColor: person.getThemeColors().svg.fill, display: 'none' }} id="fullObjectActionLine" />
 
                             <div id="boxObjectActions" style={{ display: 'none' }}>
-
                                 <div id="boxCommitChanges" style={{ backgroundColor: person.getThemeColors().headerColorPrimary.backgroundColor, borderColor: person.getThemeColors().svg.fill }} onClick={this.handleCommitChanges}>
                                     <ImgCommitChanges id="imgCommitChanges" fill={person.getThemeColors().svg.fill} />
                                 </div>
@@ -873,7 +828,6 @@ export default class extends React.Component {
                                     document.getElementById('boxGlobalActions').style.display = 'flex';
                                 else
                                     document.getElementById('boxGlobalActions').style.display = 'none';
-
 
                                 if (document.getElementById('fullGlobalActionLine').style.display == 'none')
                                     document.getElementById('fullGlobalActionLine').style.display = 'block';
