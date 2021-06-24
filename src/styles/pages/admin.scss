@@ -28,6 +28,19 @@
     justify-self: center;
 }
 
+#boxExchange {
+    margin-right: 10px;
+    width: calc(1.8vh + 1.8vw);
+    height: calc(1.8vh + 1.8vw);
+    border: 3px solid #f3f3f3;
+    border-radius: 6px;
+    cursor: pointer;
+}
+
+#boxExchange > svg {
+    margin: 5px;
+}
+
 @media (max-width: 480px) {
     #admin > #blockScroll {
         height: calc(100% - (5.2vh + 5.2vw + 3.6px));
@@ -69,6 +82,11 @@
 
     #boxCommitChanges > svg {
         margin: 5px;
+    }
+
+    #boxExchange {
+        width: 30px !important;
+        height: 30px !important;
     }
 
     #boxDeletePoint {
