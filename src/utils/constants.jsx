@@ -12,7 +12,11 @@ const PAGES = {
         SET_RATING: 'map/setRating.php'
     },
     ADMIN: {
-        GET_IS_AUTH: 'admin/getIsAuth.php'
+        GET_IS_AUTH: 'admin/getIsAuth.php',
+        SET_DATA_TO_TABLES: 'admin/setDataToTables.php',
+        DELETE_TABLES: 'admin/deleteTables.php',
+        CREATE_BECKUP_TABLES: 'admin/createBeckup.php',
+        GET_RATING_ARRAY: 'admin/getRatingArray.php'
     }
 };
 
