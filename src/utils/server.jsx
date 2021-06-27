@@ -12,12 +12,80 @@ export default class {
         };
     }
 
+    async setDBInfo(uncooked_points) {
+        let points = {
+            monuments: [],
+            tables: [],
+            streets: [],
+            directions: [],
+            pictures: [],
+            ratings: []
+        };
+
+        uncooked_points.forEach(async (point) => {
+            if (!point.isDeleted) {
+                if (point.type === 'monument')
+                    points.monuments.push({
+                        name: point.name,
+                        description: point.description,
+                        direction: point.direction,
+                        lat: point.lat,
+                        long: point.long,
+                        ratingArray: await this.getRatingArray(1, (point.id) ? point.id : -1)
+                    });
+
+                if (point.type === 'table')
+                    points.tables.push({
+                        name: point.name,
+                        description: point.description,
+                        direction: point.direction,
+                        lat: point.lat,
+                        long: point.long,
+                        ratingArray: await this.getRatingArray(1, (point.id) ? point.id : -1)
+                    });
+
+                if (point.type === 'street')
+                    points.streets.push({
+                        old_name: point.old_name,
+                        new_name: point.new_name,
+                        description: point.description,
+                        direction: point.direction,
+                        start_lat: point.start_lat,
+                        start_long: point.start_long,
+                        end_lat: point.end_lat,
+                        end_long: point.end_long,
+                        ratingArray: await this.getRatingArray(1, (point.id) ? point.id : -1)
+                    });
+            }
+        });
+
+        return new Promise(async (resolve) => {
+            await axios.get(CONSTANTS.SERVER_ADDRESS + CONSTANTS.PAGES.ADMIN.CREATE_BECKUP_TABLES).then(async (result) => {
+                if (result)
+                    await axios.get(CONSTANTS.SERVER_ADDRESS + CONSTANTS.PAGES.ADMIN.DELETE_TABLES).then(async (result) => {
+                        if (result)
+                            await axios.post(CONSTANTS.SERVER_ADDRESS + CONSTANTS.PAGES.ADMIN.SET_DATA_TO_TABLES, points).then(async (result) =>
+                                resolve(result)
+                            )
+                        else
+                            resolve(result)
+                    })
+                else
+                    resolve(result)
+            })
+        });
+    }
+
     async getAdminIsAuth(login, password) {
         return await axios.get(CONSTANTS.SERVER_ADDRESS + CONSTANTS.PAGES.ADMIN.GET_IS_AUTH + `?login=${login}` + `&password=${password}`).then((result) => { return result.data });
     }
 
     async setRating(aim) {
         axios.post(CONSTANTS.SERVER_ADDRESS + CONSTANTS.PAGES.MAP.SET_RATING + `?ip=${await aim.person.information.getIP()}` + `&id=${aim.object.id}` + `&scheme=${aim.object.id_scheme}` + `&rating=${aim.newRating}`);
+    }
+
+    async getRatingArray(id_scheme, id_object) {
+        return await axios.get(CONSTANTS.SERVER_ADDRESS + CONSTANTS.PAGES.ADMIN.GET_RATING_ARRAY + `?id_scheme=${id_scheme}` + `&id_object=${id_object}`).then((result) => { return result.data; });
     }
 
     async getImgsOfObject(aim) {
