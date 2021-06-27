@@ -24,6 +24,7 @@ import { ReactComponent as ImgUpload } from '../../assets/images/svg/upload.svg'
 import { ReactComponent as ImgManHere } from '../../assets/images/svg/manHere.svg';
 
 import Person from '../../utils/person.jsx';
+import Server from '../../utils/server.jsx';
 
 export default class extends React.Component {
     constructor({ markers, points }) {
@@ -208,12 +209,11 @@ export default class extends React.Component {
     }
 
     downloadTxtFile = () => {
-        const element = document.createElement("a");
-        const file = new Blob([JSON.stringify(this.state.points)], { type: 'text/plain' });
-        element.href = URL.createObjectURL(file);
-        element.download = "Информация.txt";
-        document.body.appendChild(element);
-        element.click();
+        let server = new Server();
+        if (server.setDBInfo(this.state.points))
+            alert('Изменения были применены успешно');
+        else
+            alert('Ошибка сервера, сообщите в тех. поддержку');
     }
 
     ElementNull() {
@@ -324,7 +324,6 @@ export default class extends React.Component {
         document.getElementById('inputSearch').value = "";
     }
 
-
     handleSearchObject = async () => {
         if (document.getElementById('inputSearch').value == 'Монумент') {
             if (this.state.tempObj.type == 'empty') {
@@ -339,7 +338,8 @@ export default class extends React.Component {
                     images: [],
                     lat: (this.state.tempObj.lat) ? (this.state.tempObj.lat) : (this.state.tempObj.start_lat),
                     long: (this.state.tempObj.long) ? (this.state.tempObj.long) : (this.state.tempObj.start_long),
-                    isDeleted: false
+                    isDeleted: false,
+                    rating: this.state.tempObj.rating
                 };
                 this.state.points[index] = this.state.tempObj;
             }
@@ -356,7 +356,8 @@ export default class extends React.Component {
                     images: [],
                     lat: (this.state.tempObj.lat) ? (this.state.tempObj.lat) : (this.state.tempObj.start_lat),
                     long: (this.state.tempObj.long) ? (this.state.tempObj.long) : (this.state.tempObj.start_long),
-                    isDeleted: false
+                    isDeleted: false,
+                    rating: this.state.tempObj.rating
                 };
                 this.state.points[index] = this.state.tempObj;
             }
@@ -373,7 +374,8 @@ export default class extends React.Component {
                     images: [],
                     lat: (this.state.tempObj.lat) ? (this.state.tempObj.lat) : (this.state.tempObj.start_lat),
                     long: (this.state.tempObj.long) ? (this.state.tempObj.long) : (this.state.tempObj.start_long),
-                    isDeleted: false
+                    isDeleted: false,
+                    rating: this.state.tempObj.rating
                 };
                 this.state.points[index] = this.state.tempObj;
             }
@@ -394,7 +396,8 @@ export default class extends React.Component {
                     images: [],
                     lat: (this.state.tempObj.lat) ? (this.state.tempObj.lat) : (this.state.tempObj.start_lat),
                     long: (this.state.tempObj.long) ? (this.state.tempObj.long) : (this.state.tempObj.start_long),
-                    isDeleted: false
+                    isDeleted: false,
+                    rating: this.state.tempObj.rating
                 };
                 this.state.points[index] = this.state.tempObj;
             }
@@ -411,7 +414,8 @@ export default class extends React.Component {
                     images: [],
                     lat: (this.state.tempObj.lat) ? (this.state.tempObj.lat) : (this.state.tempObj.start_lat),
                     long: (this.state.tempObj.long) ? (this.state.tempObj.long) : (this.state.tempObj.start_long),
-                    isDeleted: false
+                    isDeleted: false,
+                    rating: this.state.tempObj.rating
                 };
                 this.state.points[index] = this.state.tempObj;
             }
@@ -429,7 +433,8 @@ export default class extends React.Component {
                     images: [],
                     lat: (this.state.tempObj.lat) ? (this.state.tempObj.lat) : (this.state.tempObj.start_lat),
                     long: (this.state.tempObj.long) ? (this.state.tempObj.long) : (this.state.tempObj.start_long),
-                    isDeleted: false
+                    isDeleted: false,
+                    rating: this.state.tempObj.rating
                 };
                 this.state.points[index] = this.state.tempObj;
             }
@@ -452,7 +457,8 @@ export default class extends React.Component {
                     start_long: (this.state.tempObj.long) ? (this.state.tempObj.long) : (this.state.tempObj.start_long),
                     end_lat: (this.state.tempObj.lat) ? (this.state.tempObj.lat) : (this.state.tempObj.start_lat),
                     end_long: (this.state.tempObj.long) ? (this.state.tempObj.long) : (this.state.tempObj.start_long),
-                    isDeleted: false
+                    isDeleted: false,
+                    rating: this.state.tempObj.rating
                 };
                 this.state.points[index] = this.state.tempObj;
             }
@@ -472,7 +478,8 @@ export default class extends React.Component {
                     start_long: (this.state.tempObj.long) ? (this.state.tempObj.long) : (this.state.tempObj.start_long),
                     end_lat: (this.state.tempObj.lat) ? (this.state.tempObj.lat) : (this.state.tempObj.start_lat),
                     end_long: (this.state.tempObj.long) ? (this.state.tempObj.long) : (this.state.tempObj.start_long),
-                    isDeleted: false
+                    isDeleted: false,
+                    rating: this.state.tempObj.rating
                 };
                 this.state.points[index] = this.state.tempObj;
             }
@@ -493,7 +500,8 @@ export default class extends React.Component {
                     start_long: (this.state.tempObj.long) ? (this.state.tempObj.long) : (this.state.tempObj.start_long),
                     end_lat: (this.state.tempObj.lat) ? (this.state.tempObj.lat) : (this.state.tempObj.start_lat),
                     end_long: (this.state.tempObj.long) ? (this.state.tempObj.long) : (this.state.tempObj.start_long),
-                    isDeleted: false
+                    isDeleted: false,
+                    rating: this.state.tempObj.rating
                 };
                 this.state.points[index] = this.state.tempObj;
             }
@@ -516,11 +524,6 @@ export default class extends React.Component {
 
     addMarker = (e) => {
         if (!this.state.isSelectStreetTo && !this.state.isSelectStreetFrom && !this.state.isSelectPoint) {
-            console.log('States');
-            console.log(this.state.isSelectStreetTo);
-            console.log(this.state.isSelectStreetFrom);
-            console.log(this.state.isSelectPoint);
-            console.log('End states');
             const { markers, points } = this.state
             markers.push(e.latlng)
             points.push({
