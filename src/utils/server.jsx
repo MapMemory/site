@@ -86,8 +86,6 @@ export default class {
             }
         }
 
-        console.log(points);
-
         return new Promise(async (resolve) => {
             await axios.get(CONSTANTS.SERVER_ADDRESS + CONSTANTS.PAGES.ADMIN.CREATE_BECKUP_TABLES).then(async (result) => {
                 if (result)
