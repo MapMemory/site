@@ -69,50 +69,62 @@ function Body() {
 
                                     let points = []
 
-                                    objects.monuments.map((monument, idx) => points.push({
-                                        idx: 'MarkerN' + idx,
-                                        id: monument.id,
-                                        type: 'monument',
-                                        name: monument.name,
-                                        description: monument.description,
-                                        direction: monument.direction,
-                                        lat: monument.lat,
-                                        long: monument.long,
-                                        images: [],
-                                        rating: monument.rating,
-                                        isDeleted: false
-                                    }));
+                                    for (let i = 0; i < objects.monuments.length; i++) {
+                                        const monument = objects.monuments[i];
 
-                                    objects.tables.map((table, idx) => points.push({
-                                        idx: 'MarkerN' + (objects.monuments.length + idx),
-                                        id: table.id,
-                                        type: 'table',
-                                        name: table.name,
-                                        description: table.description,
-                                        direction: table.direction,
-                                        lat: table.lat,
-                                        long: table.long,
-                                        images: [],
-                                        rating: table.rating,
-                                        isDeleted: false
-                                    }));
+                                        await points.push({
+                                            idx: 'MarkerN' + i,
+                                            id: monument.id,
+                                            type: 'monument',
+                                            name: monument.name,
+                                            description: monument.description,
+                                            direction: monument.direction,
+                                            lat: monument.lat,
+                                            long: monument.long,
+                                            images: await server.getImgsOfObject({ scheme: 1, id: monument.id }),
+                                            rating: monument.rating,
+                                            isDeleted: false
+                                        });
+                                    }
 
-                                    objects.streets.map((street, idx) => points.push({
-                                        idx: 'MarkerN' + (objects.monuments.length + objects.tables.length + idx),
-                                        id: street.id,
-                                        type: 'street',
-                                        new_name: street.new_name,
-                                        old_name: street.old_name,
-                                        description: street.description,
-                                        direction: street.direction,
-                                        start_lat: street.start_lat,
-                                        start_long: street.start_long,
-                                        end_lat: street.end_lat,
-                                        end_long: street.end_long,
-                                        images: [],
-                                        rating: street.rating,
-                                        isDeleted: false
-                                    }));
+                                    for (let i = 0; i < objects.tables.length; i++) {
+                                        const table = objects.tables[i];
+
+                                        await points.push({
+                                            idx: 'MarkerN' + (objects.monuments.length + i),
+                                            id: table.id,
+                                            type: 'table',
+                                            name: table.name,
+                                            description: table.description,
+                                            direction: table.direction,
+                                            lat: table.lat,
+                                            long: table.long,
+                                            images: [],
+                                            rating: table.rating,
+                                            isDeleted: false
+                                        });
+                                    }
+
+                                    for (let i = 0; i < objects.streets.length; i++) {
+                                        const street = objects.streets[i];
+
+                                        await points.push({
+                                            idx: 'MarkerN' + (objects.monuments.length + objects.tables.length + i),
+                                            id: street.id,
+                                            type: 'street',
+                                            new_name: street.new_name,
+                                            old_name: street.old_name,
+                                            description: street.description,
+                                            direction: street.direction,
+                                            start_lat: street.start_lat,
+                                            start_long: street.start_long,
+                                            end_lat: street.end_lat,
+                                            end_long: street.end_long,
+                                            images: [],
+                                            rating: street.rating,
+                                            isDeleted: false
+                                        });
+                                    }
 
                                     await ReactDOM.render(
                                         <div id="mapBox">

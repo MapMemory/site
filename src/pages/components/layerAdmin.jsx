@@ -24,6 +24,7 @@ import { ReactComponent as ImgUpload } from '../../assets/images/svg/upload.svg'
 import { ReactComponent as ImgManHere } from '../../assets/images/svg/manHere.svg';
 
 import Person from '../../utils/person.jsx';
+import SimpleSlider from './simpleSlider.jsx';
 import Server from '../../utils/server.jsx';
 
 export default class extends React.Component {
@@ -101,18 +102,35 @@ export default class extends React.Component {
                 }}><b style={{ color: 'red' }}>Удаленный</b> Монумент</p> : <p className="text" style={person.getThemeColors().text} onClick={() => {
                 }}>Монумент</p>}
 
+                <div id="boxSlider">
+                    <SimpleSlider id="imgSlider" person={person} imgsUrl={this.state.tempObj.images} />
+                </div>
+
+                <input id="inputInfoPictures" style={{ display: 'none' }} type="file" multiple accept="image/png, image/jpeg" onClick={
+                    () => {
+                        document.getElementById("inputInfoPictures").files = null;
+                        ReactDOM.render(<div></div>, document.getElementById('boxSlider'));
+                    }} onChange={(e) => {
+                        let fileList = e.target.files;
+                        let tempImgsUrls = [];
+
+                        for (var i = 0, numFiles = fileList.length; i < numFiles; i++)
+                            tempImgsUrls.push(window.URL.createObjectURL(fileList[i]));
+
+                        ReactDOM.render(<SimpleSlider id="imgSlider" person={person} imgsUrl={tempImgsUrls} />, document.getElementById('boxSlider'));
+                    }}
+                />
+
+                <button style={{ borderColor: person.getThemeColors().text.color, backgroundColor: person.getThemeColors().headerColorPrimary.backgroundColor, color: person.getThemeColors().text.color }} id="btnInfoPictures" onClick={() => {
+                    var input = document.getElementById('inputInfoPictures');
+                    input.click();
+                }}>Выбор изображений</button>
+
                 <textarea id="infoMonumentName" class="text" style={{ color: person.getThemeColors().text.color, backgroundColor: person.getThemeColors().headerColorPrimary.backgroundColor }} title="Название" disabled={false} editable={true} placeholder="Название">{this.state.tempObj.name}</textarea>
 
                 <textarea id="infoMonumentDescription" class="text" style={{ color: person.getThemeColors().text.color, backgroundColor: person.getThemeColors().headerColorPrimary.backgroundColor }} title="Описание" disabled={false} editable={true} placeholder="Описание">{this.state.tempObj.description}</textarea>
 
                 <textarea id="infoMonumentDirection" class="text" style={{ color: person.getThemeColors().text.color, backgroundColor: person.getThemeColors().headerColorPrimary.backgroundColor }} title="Направление" disabled={false} editable={true} placeholder="Направление">{this.state.tempObj.direction}</textarea>
-
-                <input id="inputInfoMonumentPictures" style={{ display: 'none' }} type="file" multiple accept="image/png, image/jpeg" />
-
-                <button style={{ borderColor: person.getThemeColors().text.color, backgroundColor: person.getThemeColors().headerColorPrimary.backgroundColor, color: person.getThemeColors().text.color }} id="btnInfoMonumentPictures" onClick={() => {
-                    var input = document.getElementById('inputInfoMonumentPictures');
-                    input.click();
-                }}>Выбор изображений</button>
 
                 <textarea id="infoMonumentLatLong" class="text" style={{ display: 'none', color: person.getThemeColors().text.color, backgroundColor: person.getThemeColors().headerColorPrimary.backgroundColor }} title="Позиция" disabled={false} editable={false} placeholder="Позиция" value={'[' + this.state.tempObj.lat + ', ' + this.state.tempObj.long + ']'}></textarea>
 
@@ -139,18 +157,35 @@ export default class extends React.Component {
                 }}><b style={{ color: 'red' }}>Удаленная</b> Табличка</p> : <p className="text" style={person.getThemeColors().text} onClick={() => {
                 }}>Табличка</p>}
 
+                <div id="boxSlider">
+                    <SimpleSlider id="imgSlider" person={person} imgsUrl={this.state.tempObj.images} />
+                </div>
+
+                <input id="inputInfoPictures" style={{ display: 'none' }} type="file" multiple accept="image/png, image/jpeg" onClick={
+                    () => {
+                        document.getElementById("inputInfoPictures").files = null;
+                        ReactDOM.render(<div></div>, document.getElementById('boxSlider'));
+                    }} onChange={(e) => {
+                        let fileList = e.target.files;
+                        let tempImgsUrls = [];
+
+                        for (var i = 0, numFiles = fileList.length; i < numFiles; i++)
+                            tempImgsUrls.push(window.URL.createObjectURL(fileList[i]));
+
+                        ReactDOM.render(<SimpleSlider id="imgSlider" person={person} imgsUrl={tempImgsUrls} />, document.getElementById('boxSlider'));
+                    }}
+                />
+
+                <button style={{ borderColor: person.getThemeColors().text.color, backgroundColor: person.getThemeColors().headerColorPrimary.backgroundColor, color: person.getThemeColors().text.color }} id="btnInfoPictures" onClick={() => {
+                    var input = document.getElementById('inputInfoPictures');
+                    input.click();
+                }}>Выбор изображений</button>
+
                 <textarea id="infoTableName" class="text" style={{ color: person.getThemeColors().text.color, backgroundColor: person.getThemeColors().headerColorPrimary.backgroundColor }} title="Название" disabled={false} editable={true} placeholder="Название">{this.state.tempObj.name}</textarea>
 
                 <textarea id="infoTableDescription" class="text" style={{ color: person.getThemeColors().text.color, backgroundColor: person.getThemeColors().headerColorPrimary.backgroundColor }} title="Описание" disabled={false} editable={true} placeholder="Описание">{this.state.tempObj.description}</textarea>
 
                 <textarea id="infoTableDirection" class="text" style={{ color: person.getThemeColors().text.color, backgroundColor: person.getThemeColors().headerColorPrimary.backgroundColor }} title="Направление" disabled={false} editable={true} placeholder="Направление">{this.state.tempObj.direction}</textarea>
-
-                <input id="inputInfoTablePictures" style={{ display: 'none' }} type="file" multiple accept="image/png, image/jpeg" />
-
-                <button style={{ borderColor: person.getThemeColors().text.color, backgroundColor: person.getThemeColors().headerColorPrimary.backgroundColor, color: person.getThemeColors().text.color }} id="btnInfoTablePictures" onClick={() => {
-                    var input = document.getElementById('inputInfoTablePictures');
-                    input.click();
-                }}>Выбор изображений</button>
 
                 <textarea id="infoTableLatLong" class="text" style={{ display: 'none', color: person.getThemeColors().text.color, backgroundColor: person.getThemeColors().headerColorPrimary.backgroundColor }} title="Позиция" disabled={false} editable={false} placeholder="Позиция" value={'[' + this.state.tempObj.lat + ', ' + this.state.tempObj.long + ']'}></textarea>
 
@@ -174,6 +209,30 @@ export default class extends React.Component {
                 }}><b style={{ color: 'red' }}>Удаленный</b> Улица</p> : <p className="text" style={person.getThemeColors().text} onClick={() => {
                 }}>Улица</p>}
 
+                <div id="boxSlider">
+                    <SimpleSlider id="imgSlider" person={person} imgsUrl={this.state.tempObj.images} />
+                </div>
+
+                <input id="inputInfoPictures" style={{ display: 'none' }} type="file" multiple accept="image/png, image/jpeg" onClick={
+                    () => {
+                        document.getElementById("inputInfoPictures").files = null;
+                        ReactDOM.render(<div></div>, document.getElementById('boxSlider'));
+                    }} onChange={(e) => {
+                        let fileList = e.target.files;
+                        let tempImgsUrls = [];
+
+                        for (var i = 0, numFiles = fileList.length; i < numFiles; i++)
+                            tempImgsUrls.push(window.URL.createObjectURL(fileList[i]));
+
+                        ReactDOM.render(<SimpleSlider id="imgSlider" person={person} imgsUrl={tempImgsUrls} />, document.getElementById('boxSlider'));
+                    }}
+                />
+
+                <button style={{ borderColor: person.getThemeColors().text.color, backgroundColor: person.getThemeColors().headerColorPrimary.backgroundColor, color: person.getThemeColors().text.color }} id="btnInfoPictures" onClick={() => {
+                    var input = document.getElementById('inputInfoPictures');
+                    input.click();
+                }}>Выбор изображений</button>
+
                 <textarea id="infoStreetNewName" class="text" style={{ color: person.getThemeColors().text.color, backgroundColor: person.getThemeColors().headerColorPrimary.backgroundColor }} title="Новое название" disabled={false} editable={true} placeholder="Новое название">{this.state.tempObj.new_name}</textarea>
 
                 <textarea id="infoStreetOldName" class="text" style={{ color: person.getThemeColors().text.color, backgroundColor: person.getThemeColors().headerColorPrimary.backgroundColor }} title="Старое название" disabled={false} editable={true} placeholder="Старое название">{this.state.tempObj.old_name}</textarea>
@@ -181,13 +240,6 @@ export default class extends React.Component {
                 <textarea id="infoStreetDescription" class="text" style={{ color: person.getThemeColors().text.color, backgroundColor: person.getThemeColors().headerColorPrimary.backgroundColor }} title="Описание" disabled={false} editable={true} placeholder="Описание">{this.state.tempObj.description}</textarea>
 
                 <textarea id="infoStreetDirection" class="text" style={{ color: person.getThemeColors().text.color, backgroundColor: person.getThemeColors().headerColorPrimary.backgroundColor }} title="Направление" disabled={false} editable={true} placeholder="Направление">{this.state.tempObj.direction}</textarea>
-
-                <input id="inputInfoStreetPictures" style={{ display: 'none' }} type="file" multiple accept="image/png, image/jpeg" />
-
-                <button style={{ borderColor: person.getThemeColors().text.color, backgroundColor: person.getThemeColors().headerColorPrimary.backgroundColor, color: person.getThemeColors().text.color }} id="btnInfoStreetPictures" onClick={() => {
-                    var input = document.getElementById('inputInfoStreetPictures');
-                    input.click();
-                }}>Выбор изображений</button>
 
                 <textarea id="infoStreetFrom" class="text" style={{ display: 'none', color: person.getThemeColors().text.color, backgroundColor: person.getThemeColors().headerColorPrimary.backgroundColor }} title="Позиция начала" disabled={false} editable={false} placeholder="Позиция начала" value={'[' + this.state.tempObj.start_lat + ', ' + this.state.tempObj.start_long + ']'}></textarea>
 
@@ -209,6 +261,8 @@ export default class extends React.Component {
     }
 
     downloadTxtFile = () => {
+        alert('Начата отправка изменений на сервер');
+
         let server = new Server();
         if (server.setDBInfo(this.state.points))
             alert('Изменения были применены успешно');
@@ -227,9 +281,13 @@ export default class extends React.Component {
             this.state.tempObj.name = document.getElementById('infoMonumentName').value;
             this.state.tempObj.description = document.getElementById('infoMonumentDescription').value;
             this.state.tempObj.direction = document.getElementById('infoMonumentDirection').value;
-            const inputInfoMonumentPictures = document.getElementById('inputInfoMonumentPictures');
-            for (let index = 0; index < inputInfoMonumentPictures.files.length; index++)
-                this.state.tempObj.images.push(inputInfoMonumentPictures.files[index]);
+            const inputInfoPictures = document.getElementById('inputInfoPictures');
+
+            if (inputInfoPictures.files.length > 0)
+                this.state.tempObj.images = [];
+
+            for (let index = 0; index < inputInfoPictures.files.length; index++)
+                this.state.tempObj.images.push(window.URL.createObjectURL(inputInfoPictures.files[index]));
 
             index = this.state.points.findIndex((point) => point.idx == this.state.tempObj.idx);
             if (index > -1)
@@ -240,9 +298,13 @@ export default class extends React.Component {
             this.state.tempObj.name = document.getElementById('infoTableName').value;
             this.state.tempObj.description = document.getElementById('infoTableDescription').value;
             this.state.tempObj.direction = document.getElementById('infoTableDirection').value;
-            const inputInfoTablePictures = document.getElementById('inputInfoTablePictures');
-            for (let index = 0; index < inputInfoTablePictures.files.length; index++)
-                this.state.tempObj.images.push(inputInfoTablePictures.files[index]);
+            const inputInfoPictures = document.getElementById('inputInfoPictures');
+
+            if (inputInfoPictures.files.length > 0)
+                this.state.tempObj.images = [];
+
+            for (let index = 0; index < inputInfoPictures.files.length; index++)
+                this.state.tempObj.images.push(window.URL.createObjectURL(inputInfoPictures.files[index]));
 
             index = this.state.points.findIndex((point) => point.idx == this.state.tempObj.idx);
             if (index > -1)
@@ -254,14 +316,20 @@ export default class extends React.Component {
             this.state.tempObj.new_name = document.getElementById('infoStreetNewName').value;
             this.state.tempObj.description = document.getElementById('infoStreetDescription').value;
             this.state.tempObj.direction = document.getElementById('infoStreetDirection').value;
-            const inputInfoStreetPictures = document.getElementById('inputInfoStreetPictures');
-            for (let index = 0; index < inputInfoStreetPictures.files.length; index++)
-                this.state.tempObj.images.push(inputInfoStreetPictures.files[index]);
+            const inputInfoPictures = document.getElementById('inputInfoPictures');
+
+            if (inputInfoPictures.files.length > 0)
+                this.state.tempObj.images = [];
+
+            for (let index = 0; index < inputInfoPictures.files.length; index++)
+                this.state.tempObj.images.push(window.URL.createObjectURL(inputInfoPictures.files[index]));
 
             index = this.state.points.findIndex((point) => point.idx == this.state.tempObj.idx);
             if (index > -1)
                 this.state.points[index] = this.state.tempObj;
         }
+
+        alert('Объект был сохранен');
     }
 
     handleDeletePoint = async () => {
@@ -270,6 +338,7 @@ export default class extends React.Component {
         this.state.tempObj = this.state.points[index];
         await this.openInfo(this.state.tempObj.idx);
         await this.closeInfo();
+        alert('Объект был удален');
     }
 
     BlockFullInfo({ person }) {
@@ -353,7 +422,7 @@ export default class extends React.Component {
                     name: '',
                     description: '',
                     direction: '',
-                    images: [],
+                    images: this.state.tempObj.images,
                     lat: (this.state.tempObj.lat) ? (this.state.tempObj.lat) : (this.state.tempObj.start_lat),
                     long: (this.state.tempObj.long) ? (this.state.tempObj.long) : (this.state.tempObj.start_long),
                     isDeleted: false,
@@ -371,7 +440,7 @@ export default class extends React.Component {
                     name: '',
                     description: '',
                     direction: '',
-                    images: [],
+                    images: this.state.tempObj.images,
                     lat: (this.state.tempObj.lat) ? (this.state.tempObj.lat) : (this.state.tempObj.start_lat),
                     long: (this.state.tempObj.long) ? (this.state.tempObj.long) : (this.state.tempObj.start_long),
                     isDeleted: false,
@@ -411,7 +480,7 @@ export default class extends React.Component {
                     name: '',
                     description: '',
                     direction: '',
-                    images: [],
+                    images: this.state.tempObj.images,
                     lat: (this.state.tempObj.lat) ? (this.state.tempObj.lat) : (this.state.tempObj.start_lat),
                     long: (this.state.tempObj.long) ? (this.state.tempObj.long) : (this.state.tempObj.start_long),
                     isDeleted: false,
@@ -430,7 +499,7 @@ export default class extends React.Component {
                     name: '',
                     description: '',
                     direction: '',
-                    images: [],
+                    images: this.state.tempObj.images,
                     lat: (this.state.tempObj.lat) ? (this.state.tempObj.lat) : (this.state.tempObj.start_lat),
                     long: (this.state.tempObj.long) ? (this.state.tempObj.long) : (this.state.tempObj.start_long),
                     isDeleted: false,
@@ -473,7 +542,7 @@ export default class extends React.Component {
                     old_name: '',
                     description: '',
                     direction: '',
-                    images: [],
+                    images: this.state.tempObj.images,
                     start_lat: (this.state.tempObj.lat) ? (this.state.tempObj.lat) : (this.state.tempObj.start_lat),
                     start_long: (this.state.tempObj.long) ? (this.state.tempObj.long) : (this.state.tempObj.start_long),
                     end_lat: (this.state.tempObj.lat) ? (this.state.tempObj.lat) : (this.state.tempObj.start_lat),
@@ -495,7 +564,7 @@ export default class extends React.Component {
                     old_name: '',
                     description: '',
                     direction: '',
-                    images: [],
+                    images: this.state.tempObj.images,
                     start_lat: (this.state.tempObj.lat) ? (this.state.tempObj.lat) : (this.state.tempObj.start_lat),
                     start_long: (this.state.tempObj.long) ? (this.state.tempObj.long) : (this.state.tempObj.start_long),
                     end_lat: (this.state.tempObj.lat) ? (this.state.tempObj.lat) : (this.state.tempObj.start_lat),

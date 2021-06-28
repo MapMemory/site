@@ -16,7 +16,8 @@ const PAGES = {
         SET_DATA_TO_TABLES: 'admin/setDataToTables.php',
         DELETE_TABLES: 'admin/deleteTables.php',
         CREATE_BECKUP_TABLES: 'admin/createBeckup.php',
-        GET_RATING_ARRAY: 'admin/getRatingArray.php'
+        GET_RATING_ARRAY: 'admin/getRatingArray.php',
+        MOVE_FILES_FROM_FOLDER: 'admin/moveFilesFromFolder.php'
     }
 };
 

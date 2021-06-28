@@ -41,6 +41,11 @@
     margin: 5px;
 }
 
+#boxSlider {
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
 @media (max-width: 480px) {
     #admin > #blockScroll {
         height: calc(100% - (5.2vh + 5.2vw + 3.6px));
