@@ -99,7 +99,7 @@ function Body() {
                                             direction: table.direction,
                                             lat: table.lat,
                                             long: table.long,
-                                            images: [],
+                                            images: await server.getImgsOfObject({ scheme: 2, id: table.id }),
                                             rating: table.rating,
                                             isDeleted: false
                                         });
@@ -120,7 +120,7 @@ function Body() {
                                             start_long: street.start_long,
                                             end_lat: street.end_lat,
                                             end_long: street.end_long,
-                                            images: [],
+                                            images: await server.getImgsOfObject({ scheme: 3, id: street.id }),
                                             rating: street.rating,
                                             isDeleted: false
                                         });
