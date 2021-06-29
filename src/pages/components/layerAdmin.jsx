@@ -103,7 +103,7 @@ export default class extends React.Component {
                 }}>Монумент</p>}
 
                 <div id="boxSlider">
-                    <SimpleSlider id="imgSlider" person={person} imgsUrl={this.state.tempObj.images} />
+                    {(this.state.tempObj.images.length != 0) ? <SimpleSlider id="imgSlider" person={person} imgsUrl={this.state.tempObj.images} /> : <div></div>}
                 </div>
 
                 <input id="inputInfoPictures" style={{ display: 'none' }} type="file" multiple accept="image/png, image/jpeg" onClick={
@@ -158,7 +158,7 @@ export default class extends React.Component {
                 }}>Табличка</p>}
 
                 <div id="boxSlider">
-                    <SimpleSlider id="imgSlider" person={person} imgsUrl={this.state.tempObj.images} />
+                    {(this.state.tempObj.images.length != 0) ? <SimpleSlider id="imgSlider" person={person} imgsUrl={this.state.tempObj.images} /> : <div></div>}
                 </div>
 
                 <input id="inputInfoPictures" style={{ display: 'none' }} type="file" multiple accept="image/png, image/jpeg" onClick={
@@ -210,7 +210,7 @@ export default class extends React.Component {
                 }}>Улица</p>}
 
                 <div id="boxSlider">
-                    <SimpleSlider id="imgSlider" person={person} imgsUrl={this.state.tempObj.images} />
+                    {(this.state.tempObj.images.length != 0) ? <SimpleSlider id="imgSlider" person={person} imgsUrl={this.state.tempObj.images} /> : <div></div>}
                 </div>
 
                 <input id="inputInfoPictures" style={{ display: 'none' }} type="file" multiple accept="image/png, image/jpeg" onClick={
@@ -393,7 +393,9 @@ export default class extends React.Component {
         document.getElementById('inputSearch').value = "";
     }
 
-    handleSearchObject = async () => {
+    handleExchangeObject = async () => {
+        let messageText = "Тип объекта был изменен";
+
         if (document.getElementById('inputSearch').value == 'Монумент') {
             if (this.state.tempObj.type == 'empty') {
                 let index = this.state.points.findIndex((point) => point.idx == this.state.tempObj.idx);
@@ -450,6 +452,7 @@ export default class extends React.Component {
             }
 
             await this.openInfo(this.state.tempObj.idx);
+            alert(messageText);
         }
 
         if (document.getElementById('inputSearch').value == 'Табличка') {
@@ -508,6 +511,7 @@ export default class extends React.Component {
                 this.state.points[index] = this.state.tempObj;
             }
             await this.openInfo(this.state.tempObj.idx);
+            alert(messageText);
         }
 
         if (document.getElementById('inputSearch').value == 'Улица') {
@@ -575,12 +579,13 @@ export default class extends React.Component {
                 this.state.points[index] = this.state.tempObj;
             }
             await this.openInfo(this.state.tempObj.idx);
+            alert(messageText);
         }
     }
 
     handleChangeSearchObject = async (e) => {
         if (e.key === 'Enter') {
-            this.handleSearchObject();
+            this.handleExchangeObject();
         }
     }
 
@@ -844,7 +849,7 @@ export default class extends React.Component {
                                     <ImgMop id="imgMopClear" fill={person.getThemeColors().svg.fill} />
                                 </div>
 
-                                <div id="boxExchange" style={{ backgroundColor: person.getThemeColors().headerColorPrimary.backgroundColor, borderColor: person.getThemeColors().svg.fill }} onClick={this.handleSearchObject}>
+                                <div id="boxExchange" style={{ backgroundColor: person.getThemeColors().headerColorPrimary.backgroundColor, borderColor: person.getThemeColors().svg.fill }} onClick={this.handleExchangeObject}>
                                     <ImgExchange id="imgExchange" fill={person.getThemeColors().svg.fill} />
                                 </div>
                             </div>

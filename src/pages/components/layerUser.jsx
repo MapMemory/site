@@ -178,8 +178,9 @@ export default class extends React.Component {
         return (
             <div>
                 <div id="boxSlider">
-                    <SimpleSlider person={person} imgsUrl={imgsUrl} />
+                    {(imgsUrl.length != 0) ? <SimpleSlider id="imgSlider" person={person} imgsUrl={imgsUrl} /> : <div></div>}
                 </div>
+
                 <div className="text" style={person.getThemeColors().text} title="Тип">Монумент</div>
                 <ReactStars
                     count={5}
@@ -213,8 +214,9 @@ export default class extends React.Component {
         return (
             <div>
                 <div id="boxSlider">
-                    <SimpleSlider person={person} imgsUrl={imgsUrl} />
+                    {(imgsUrl.length != 0) ? <SimpleSlider id="imgSlider" person={person} imgsUrl={imgsUrl} /> : <div></div>}
                 </div>
+
                 <div className="text" style={person.getThemeColors().text} title="Тип">Табличка</div>
                 <ReactStars
                     count={5}
@@ -248,8 +250,9 @@ export default class extends React.Component {
         return (
             <div>
                 <div id="boxSlider">
-                    <SimpleSlider person={person} imgsUrl={imgsUrl} />
+                    {(imgsUrl.length != 0) ? <SimpleSlider id="imgSlider" person={person} imgsUrl={imgsUrl} /> : <div></div>}
                 </div>
+
                 <div className="text" style={person.getThemeColors().text} title="Название">{object.new_name}</div>
                 <ReactStars
                     count={5}
