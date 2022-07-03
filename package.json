@@ -6,7 +6,7 @@
     "@testing-library/jest-dom": "5.14.1",
     "@testing-library/react": "11.2.7",
     "@testing-library/user-event": "13.1.9",
-    "axios": "0.21.1",
+    "axios": "0.27.2",
     "jquery": "3.6.0",
     "leaflet": "1.7.1",
     "leaflet-control-geocoder": "2.3.0",
