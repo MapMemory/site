@@ -2,7 +2,9 @@ import axios from 'axios';
 import CONSTANTS from '../utils/constants.jsx';
 
 export default class {
-    constructor() { }
+    constructor() {
+        axios.defaults.headers.common['Authorization'] = "Basic " + Buffer.from(`${CONSTANTS.BASIC_AUTH.USERNAME}:${CONSTANTS.BASIC_AUTH.PASSWORD}`, 'utf8').toString('base64');
+     }
 
     async getObjects(name) {
         return {
@@ -121,7 +123,19 @@ export default class {
     }
 
     async getImgsOfObject(aim) {
-        return await axios.get(CONSTANTS.SERVER_ADDRESS + CONSTANTS.PAGES.MAP.GET_IMG_OF_OBJECT + `?scheme=${aim.scheme}` + `&id=${aim.id}`).then((result) => { return result.data });
+        let links = await axios.get(CONSTANTS.SERVER_ADDRESS + CONSTANTS.PAGES.MAP.GET_IMG_OF_OBJECT + `?scheme=${aim.scheme}` + `&id=${aim.id}`).then((result) => result.data);
+
+        let imgs = [];
+
+        for (let i = 0; i < links.length; i++) {
+            const link = links[i];
+
+            imgs.push(await axios.get(link, {
+                responseType: 'arraybuffer'
+            }).then((result) => Buffer.from(result.data, 'binary').toString('base64')))
+        }
+
+        return imgs;
     }
 
     async getAimObject(aim) {
@@ -133,7 +147,6 @@ export default class {
     }
 
     async getMonuments(name) {
-        console.log(CONSTANTS.SERVER_ADDRESS + CONSTANTS.PAGES.MAP.GET_MONUMENTS + `?name=${name}`);
         return await axios.get(CONSTANTS.SERVER_ADDRESS + CONSTANTS.PAGES.MAP.GET_MONUMENTS + `?name=${name}`).then((result) => { return result.data });
     }
 

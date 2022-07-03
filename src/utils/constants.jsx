@@ -1,5 +1,9 @@
-const SERVER_ADDRESS = 'http://localhost:80/';
+const SERVER_ADDRESS = 'http://localhost:2000/';
 const SITE_ADDRESS = 'http://localhost:3000';
+const BASIC_AUTH = {
+    USERNAME: 'root',
+    PASSWORD: 'root'
+};
 
 const PAGES = {
     MAP: {
@@ -21,4 +25,4 @@ const PAGES = {
     }
 };
 
-export default { SITE_ADDRESS, SERVER_ADDRESS, PAGES };
+export default { BASIC_AUTH, SITE_ADDRESS, SERVER_ADDRESS, PAGES };

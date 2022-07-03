@@ -58,7 +58,7 @@ export default ({ person, imgsUrl }) => {
         <div id="boxImgs">
             <Swiper {...colorParams} ref={swiperRef}>
                 {
-                    imgsUrl.map((imgUrl) => <img src={imgUrl} />)
+                    imgsUrl.map((imgUrl) => <img src={"data:image/png;base64," + imgUrl} />)
                 }
             </Swiper>
         </div >
